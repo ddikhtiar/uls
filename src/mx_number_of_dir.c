@@ -2,7 +2,7 @@
 
 int mx_number_of_dir(char **arr) {
 	int num_dirs = 0;
-	char **arr_ptr = arr;
+	char **arr_ptr = arr + 1;
 
 	while (*arr_ptr && **arr_ptr == '-')
 		arr_ptr++;

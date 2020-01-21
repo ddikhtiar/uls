@@ -36,6 +36,7 @@ SRC =   ./mx_binary_search.c \
         ./mx_print_strarr.c \
         ./mx_print_unicode.c \
         ./mx_printchar.c \
+        ./mx_printerr.c \
         ./mx_printint.c \
         ./mx_printstr.c \
         ./mx_push_back.c \
@@ -96,6 +97,7 @@ SRCS =  ./src/mx_binary_search.c \
         ./src/mx_print_strarr.c \
         ./src/mx_print_unicode.c \
         ./src/mx_printchar.c \
+        ./src/mx_printerr.c \
         ./src/mx_printint.c \
         ./src/mx_printstr.c \
         ./src/mx_push_back.c \
@@ -156,6 +158,7 @@ OBJ =   ./mx_binary_search.o \
         ./mx_print_strarr.o \
         ./mx_print_unicode.o \
         ./mx_printchar.o \
+        ./mx_printerr.o \
         ./mx_printint.o  \
         ./mx_printstr.o \
         ./mx_push_back.o \
@@ -216,6 +219,7 @@ OBJO =  ./obj/mx_binary_search.o \
         ./obj/mx_print_strarr.o \
         ./obj/mx_print_unicode.o \
         ./obj/mx_printchar.o \
+        ./obj/mx_printerr.o \
         ./obj/mx_printint.o  \
         ./obj/mx_printstr.o \
         ./obj/mx_push_back.o \
