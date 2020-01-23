@@ -1,7 +1,7 @@
 #ifndef ULS_H
 #define ULS_H
 
-#include "../libmx/inc/libmx.h"
+#include "libmx/inc/libmx.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -13,13 +13,14 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-int mx_number_of_dir(char **arr); //Возвращает кол-во дирректорий
-int mx_number_of_flags(char **arr); //Возвращает кол-во флагов
-char **mx_dir_arr(char **arr); //Возвращает массив названий дирректорий
-char **mx_flags_arr(char **arr); //Возвращает массив флагов
-void mx_flags_out(char **arr);
-char **mx_arr_filenames(const char *dir_name); //Возвращает массив названий
-                                               //файлов из заданной папки
+#define ANSI_COLOR_RED        "\x1b[31m"
+#define ANSI_COLOR_GREEN      "\x1b[32m"
+#define ANSI_COLOR_BOLD_GREEN "\x1b[32;1m"
+#define ANSI_COLOR_YELLOW     "\x1b[33m"
+#define ANSI_COLOR_BLUE       "\x1b[34m"
+#define ANSI_COLOR_MAGENTA    "\x1b[35m"
+#define ANSI_COLOR_BOLD_CYAN  "\x1b[96;1m"
+#define ANSI_COLOR_RESET      "\x1b[0m"
 
 typedef struct s_flags {
     int f_a; //Включает в список файлы и папки, начинающиеся с '.'
@@ -41,6 +42,22 @@ typedef struct s_flags {
     int illegal;
 } t_flags;
 
+typedef struct s_list{
+    struct *s_data;
+    struct s_list * next;
+} t_list
+
+typedef struct s_data {
+    char *file_name;
+    struct stat *buffer;
+} t_data
+
+int mx_number_of_dir(char **arr);
+int mx_number_of_flags(char **arr);
+char **mx_dir_arr(char **arr);
+char **mx_flags_arr(char **arr);
+void mx_flags_out(char **arr);
+char **mx_arr_filenames(const char *dir_name);
 t_flags *mx_create_flags_struct(char ***arr_str);
 bool mx_legal_flag(char ***arr_str);
 void mx_print_illegal(char ***arr_str);
