@@ -10,7 +10,7 @@ INCF = inc/uls.h
 
 SRC = \
 main.c \
-mx_arr_filenames.c \
+mx_filenames.c \
 mx_create_flags_struct.c \
 mx_dir_arr.c \
 mx_find_flag.c \
@@ -19,12 +19,13 @@ mx_legal_flag.c \
 mx_number_of_dir.c \
 mx_number_of_flags.c \
 mx_print_illegal.c \
+mx_data_factory.c \
+mx_list_factory.c \
 # mx_flags_out.c \
 
 SRCF = \
 src/main.c \
-src/test.c \
-src/mx_arr_filenames.c \
+src/mx_filenames.c \
 src/mx_create_flags_struct.c \
 src/mx_dir_arr.c \
 src/mx_find_flag.c \
@@ -33,11 +34,13 @@ src/mx_legal_flag.c \
 src/mx_number_of_dir.c \
 src/mx_number_of_flags.c \
 src/mx_print_illegal.c \
+src/mx_data_factory.c \
+src/mx_list_factory.c \
 # src/mx_flags_out.c \
 
 OBJ = \
 main.o \
-mx_arr_filenames.o \
+mx_filenames.o \
 mx_create_flags_struct.o \
 mx_dir_arr.o \
 mx_find_flag.o \
@@ -46,6 +49,8 @@ mx_legal_flag.o \
 mx_number_of_dir.o \
 mx_number_of_flags.o \
 mx_print_illegal.o \
+mx_data_factory.o \
+mx_list_factory.o \
 # mx_flags_out.o \
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic

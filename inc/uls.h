@@ -42,25 +42,30 @@ typedef struct s_flags {
     int illegal;
 } t_flags;
 
-typedef struct s_list{
-    struct *s_data;
-    struct s_list * next;
-} t_list
+struct s_data;
+
+typedef struct s_node {
+    struct s_data *cur_data;
+    struct s_node *next;
+} t_node;
 
 typedef struct s_data {
     char *file_name;
     struct stat *buffer;
-} t_data
+} t_data;
 
 int mx_number_of_dir(char **arr);
 int mx_number_of_flags(char **arr);
 char **mx_dir_arr(char **arr);
 char **mx_flags_arr(char **arr);
 void mx_flags_out(char **arr);
-char **mx_arr_filenames(const char *dir_name);
 t_flags *mx_create_flags_struct(char ***arr_str);
 bool mx_legal_flag(char ***arr_str);
 void mx_print_illegal(char ***arr_str);
 bool mx_find_flag(char ***arr_str, char f_char);
+t_data *mx_create_data(char *filename);
+t_node *mx_cr_node(t_data *current);
+t_node *mx_get_filenames(const char *dir_name);
+
 
 #endif
