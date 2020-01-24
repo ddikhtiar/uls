@@ -22,22 +22,22 @@
 #define ANSI_COLOR_BOLD_CYAN  "\x1b[96;1m"
 #define ANSI_COLOR_RESET      "\x1b[0m"
 
-#define OUR_ISREG(m) (((m) & S_IFMT) == S_IFREG)
-#define OUR_ISDIR(m) (((m) & S_IFMT) == S_IFDIR)
-#define OUR_ISLNK(m) (((m) & S_IFMT) == S_IFLNK)
-#define OUR_ISCHR(m) (((m) & S_IFMT) == S_IFCHR)
-#define OUR_ISBLK(m) (((m) & S_IFMT) == S_IFBLK)
-#define OUR_ISFIFO(m) (((m) & S_IFMT) == S_IFIFO)
-#define OUR_ISSOCK(m) (((m) & S_IFMT) == S_IFSOCK)
+#define MX_ISREG(m) (((m) & S_IFMT) == S_IFREG)
+#define MX_ISDIR(m) (((m) & S_IFMT) == S_IFDIR)
+#define MX_ISLNK(m) (((m) & S_IFMT) == S_IFLNK)
+#define MX_ISCHR(m) (((m) & S_IFMT) == S_IFCHR)
+#define MX_ISBLK(m) (((m) & S_IFMT) == S_IFBLK)
+#define MX_ISFIFO(m) (((m) & S_IFMT) == S_IFIFO)
+#define MX_ISSOCK(m) (((m) & S_IFMT) == S_IFSOCK)
 
 /*
-#define OUR_ISREG(m) (((m) & 0170000) == 0100000)
-#define OUR_ISDIR(m) (((m) & 0170000) == 0040000)
-#define OUR_ISLNK(m) (((m) & 0170000) == 0120000)
-#define OUR_ISCHR(m) (((m) & 0170000) == 0020000)
-#define OUR_ISBLK(m) (((m) & 0170000) == 0060000)
-#define OUR_ISFIFO(m) (((m) & 0170000) == 0010000)
-#define OUR_ISSOCK(m) (((m) & 0170000) == 0140000)
+#define MX_ISREG(m) (((m) & 0170000) == 0100000)
+#define MX_ISDIR(m) (((m) & 0170000) == 0040000)
+#define MX_ISLNK(m) (((m) & 0170000) == 0120000)
+#define MX_ISCHR(m) (((m) & 0170000) == 0020000)
+#define MX_ISBLK(m) (((m) & 0170000) == 0060000)
+#define MX_ISFIFO(m) (((m) & 0170000) == 0010000)
+#define MX_ISSOCK(m) (((m) & 0170000) == 0140000)
 */
 
 typedef struct s_flags {
@@ -61,20 +61,28 @@ typedef struct s_flags {
 } t_flags;
 
 typedef struct s_data {
-    char *file_name;
+    char *name;
     struct stat *buffer;
+    struct s_data *next;
 } t_data;
 
+/*
 typedef struct s_node {
     struct s_data *cur_data;
     struct s_node *next;
 } t_node;
+*/
+
+typedef struct s_d_list {
+    struct s_data *link;
+    struct s_d_list *next_list;
+} t_d_list;
 
 int mx_number_of_dir(char **arr); //Возвращает кол-во дирректорий
 int mx_number_of_flags(char **arr); //Возвращает кол-во флагов
-char **mx_dir_arr(char **arr); //Возвращает массив названий дирректорий
-char **mx_flags_arr(char **arr); //Возвращает массив флагов
-void mx_flags_out(char **arr);
+char **mx_dir_arr(int argc, char **arr); //Возвращает массив названий дирректорий
+char **mx_flags_arr(int argc, char **arr); //Возвращает массив флагов
+//void mx_flags_out(char **arr);
 char **mx_arr_filenames(const char *dir_name); //Возвращает массив названий
                                                //файлов из заданной папки
 t_flags *mx_create_flags_struct(char ***arr_str); //Создает структуру флагов
@@ -91,8 +99,10 @@ bool mx_legal_dirname(const char *name); //Проверяет, является 
 void mx_print_wrong_dir(const char *name); //Выводит ошибку, если указано
                                            //неверное имя файла/папки
 bool mx_status(struct stat buf); //
-t_data *mx_create_data(char *filename);
-t_node *mx_cr_node(t_data *current);
-t_node *mx_get_filenames(const char *dir_name);
+t_data *mx_create_data(char *filename); //Создает лист с данными о файле
+struct stat *mx_fill_buffer(const char *filename); //Заполняет буффер
+                                                   //в листе данными из stat
+//t_node *mx_create_node(t_data *current);
+//t_node *mx_get_filenames(const char *dir_name);
 
 #endif

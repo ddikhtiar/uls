@@ -2,7 +2,7 @@
 
 int mx_number_of_flags(char **arr) {
 	int num_flgs = 0;
-	char **arr_ptr = arr + 1;
+	char **arr_ptr = arr;
 
 	while (*arr_ptr && **arr_ptr == '-') {
 		num_flgs++;

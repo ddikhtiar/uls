@@ -11,15 +11,14 @@ INCF = inc/uls.h
 SRC = \
     main.c \
     mx_check_arr_dir.c \
+    mx_create_data.c \
     mx_create_flags_struct.c \
-    mx_data_factory.c \
     mx_dir_arr.c \
-    mx_get_filenames.c \
+    mx_fill_buffer.c \
     mx_find_flag.c \
     mx_flags_arr.c \
     mx_legal_dirname.c \
     mx_legal_flag.c \
-    mx_list_factory.c \
     mx_number_of_dir.c \
     mx_number_of_flags.c \
     mx_print_illegal.c \
@@ -29,15 +28,14 @@ SRC = \
 SRCF = \
     src/main.c \
     src/mx_check_arr_dir.c \
+    src/mx_create_data.c \
     src/mx_create_flags_struct.c \
-    src/mx_data_factory.c \
     src/mx_dir_arr.c \
-    src/mx_get_filenames.c \
+    src/mx_fill_buffer.c \
     src/mx_find_flag.c \
     src/mx_flags_arr.c \
     src/mx_legal_dirname.c \
     src/mx_legal_flag.c \
-    src/mx_list_factory.c \
     src/mx_number_of_dir.c \
     src/mx_number_of_flags.c \
     src/mx_print_illegal.c \
@@ -49,15 +47,14 @@ OBJ = $(SRC:.c=.o)
 OBJO = \
     obj/main.o \
     obj/mx_check_arr_dir.o \
+    obj/mx_create_data.o \
     obj/mx_create_flags_struct.o \
-    obj/mx_data_factory.o \
     obj/mx_dir_arr.o \
-    obj/mx_get_filenames.o \
+    obj/mx_fill_buffer.o \
     obj/mx_find_flag.o \
     obj/mx_flags_arr.o \
     obj/mx_legal_dirname.o \
     obj/mx_legal_flag.o \
-    obj/mx)mx_list_factory.o \
     obj/mx_number_of_dir.o \
     obj/mx_number_of_flags.o \
     obj/mx_print_illegal.o \
