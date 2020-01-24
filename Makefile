@@ -10,7 +10,6 @@ INCF = inc/uls.h
 
 SRC = \
     main.c \
-    mx_arr_filenames.c \
     mx_check_arr_dir.c \
     mx_create_flags_struct.c \
     mx_data_factory.c \
@@ -26,11 +25,9 @@ SRC = \
     mx_print_illegal.c \
     mx_print_wrong_dir.c \
     mx_status.c \
-  # mx_flags_out.c \
 
 SRCF = \
     src/main.c \
-    src/mx_arr_filenames.c \
     src/mx_check_arr_dir.c \
     src/mx_create_flags_struct.c \
     src/mx_data_factory.c \
@@ -46,13 +43,11 @@ SRCF = \
     src/mx_print_illegal.c \
     src/mx_print_wrong_dir.c \
     src/mx_status.c \
-  # src/mx_flags_out.c \
 
 OBJ = $(SRC:.c=.o)
 
 OBJO = \
     obj/main.o \
-    obj/mx_arr_filenames.o \
     obj/mx_check_arr_dir.o \
     obj/mx_create_flags_struct.o \
     obj/mx_data_factory.o \
@@ -68,7 +63,6 @@ OBJO = \
     obj/mx_print_illegal.o \
     obj/mx_print_wrong_dir.o \
     obj/mx_status.o \
-  # mx_flags_out.o \
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 

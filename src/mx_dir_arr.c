@@ -10,7 +10,7 @@ char **mx_dir_arr(char **arr) {
 		while (**arr_ptr == '-')
 			arr_ptr++;
 		for (int i = 0; i < num_dirs; i++) {
-			dirs[i] = *arr_ptr;
+			dirs[i] = mx_strdup(*arr_ptr);
 			arr_ptr++;
 		}
 		dirs[num_dirs] = NULL;

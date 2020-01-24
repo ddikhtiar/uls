@@ -19,17 +19,18 @@ void mx_check_arr_dir(char ***arr_dirname) {
 
 static void sx_delete_illegal_dirname(char ***arr_ptr, char **str_ptr) {
     char **arr = *arr_ptr;
+    char **ptr_del = NULL;
     char *del = NULL;
 
     while (*arr) {
         if (arr == str_ptr) {
-            del = mx_strdup(*arr);
-            while (*(arr + 1)) {
+            del = *arr;
+            while (*(arr + 1) != NULL) {
                 *arr = *(arr + 1);
                 arr++;
             }
+            ptr_del = arr + 1;
             *arr = NULL;
-            free(arr + 1);
             mx_strdel(&del);
             break;
         }
