@@ -25,6 +25,7 @@ SRC = \
     mx_print_illegal.c \
     mx_print_wrong_dir.c \
     mx_push_data_back.c \
+    mx_push_list_back.c \
     mx_status.c \
 
 SRCF = \
@@ -44,6 +45,7 @@ SRCF = \
     src/mx_print_illegal.c \
     src/mx_print_wrong_dir.c \
     src/mx_push_data_back.c \
+    src/mx_push_list_back.c \
     src/mx_status.c \
 
 OBJ = $(SRC:.c=.o)
@@ -65,6 +67,7 @@ OBJO = \
     obj/mx_print_illegal.o \
     obj/mx_print_wrong_dir.o \
     obj/mx_push_data_back.o \
+    obj/mx_push_list_back.o \
     obj/mx_status.o \
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic

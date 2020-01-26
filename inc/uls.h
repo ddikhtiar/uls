@@ -84,12 +84,12 @@ void mx_print_illegal(char ***arr_str); //Выводит ошибку, если 
                                         //не валидный флаг
 bool mx_find_flag(char ***arr_str, char f_char); //Проверяет наличие флага
                                                  //во входящем массиве
-void mx_check_arr_dir(char ***arr_dirname); //Проверяет входящий массив папок,
+int mx_check_arr_dir(char ***arr_dirname); //Проверяет входящий массив папок,
                                             //удаляет не валидные названия
                                             //и выводит ошибку "No such..."
 bool mx_legal_dirname(const char *name); //Проверяет, является ли указанная
                                          //строка именем файла/папки/ссылкой
-void mx_print_wrong_dir(const char *name); //Выводит ошибку, если указано
+void mx_print_wrong_dir(char ***arr_del); //Выводит ошибку, если указано
                                            //неверное имя файла/папки
 bool mx_status(struct stat buf); //Часть mx_legal_dirname()
 t_data *mx_create_data(const char *filename); //Создает лист с данными о файле
@@ -99,9 +99,10 @@ void mx_push_data_back(t_data **list, const char *filename); //Добавляе�
                                                              //с данными файла
                                                              //в конец списка
 t_d_list *mx_create_list(t_data *data); //Создает лист со списком данных
-void mx_push_list_back(t_d_list **first, t_d_list *list) //Добавляет список
+void mx_push_list_back(t_d_list **first, t_d_list *list); //Добавляет список
                                                          //данных в конец
                                                          //списка списков
+t_d_list *mx_list_assembly(t_flags **flags, char ***names);
 //t_node *mx_create_node(t_data *current);
 //t_node *mx_get_filenames(const char *dir_name);
 

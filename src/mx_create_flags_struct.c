@@ -27,6 +27,8 @@ t_flags *mx_create_flags_struct(char ***arr_str) {
 }
 
 static void sx_modify(t_flags **flags, char ***arr_str) {
+    if (*arr == NULL)
+        return;
     if (!mx_legal_flag(arr_str)) {
         (*flags)->illegal = 1;
         mx_print_illegal(arr_str);
@@ -40,15 +42,15 @@ static void sx_modify(t_flags **flags, char ***arr_str) {
             (*flags)->f_l = 1;
         if (mx_find_flag(arr_str, '1'))
             (*flags)->f_1 = 1;
-        if (mx_find_flag(arr_str, 'G'))
-            (*flags)->f_G = 1;
-        if (mx_find_flag(arr_str, 'C'))
-            (*flags)->f_C = 1;
 		sx_modify_end(flags, arr_str);
     }
 }
 
 static void sx_modify_end(t_flags **flags, char ***arr_str) {
+    if (mx_find_flag(arr_str, 'G'))
+        (*flags)->f_G = 1;
+    if (mx_find_flag(arr_str, 'C'))
+        (*flags)->f_C = 1;
     if (mx_find_flag(arr_str, 'r'))
         (*flags)->f_r = 1;
     if (mx_find_flag(arr_str, 't'))
