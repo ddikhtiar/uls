@@ -13,6 +13,7 @@ SRC = \
     mx_check_arr_dir.c \
     mx_create_data.c \
     mx_create_flags_struct.c \
+    mx_create_list.c \
     mx_dir_arr.c \
     mx_fill_buffer.c \
     mx_find_flag.c \
@@ -23,6 +24,7 @@ SRC = \
     mx_number_of_flags.c \
     mx_print_illegal.c \
     mx_print_wrong_dir.c \
+    mx_push_data_back.c \
     mx_status.c \
 
 SRCF = \
@@ -30,6 +32,7 @@ SRCF = \
     src/mx_check_arr_dir.c \
     src/mx_create_data.c \
     src/mx_create_flags_struct.c \
+    src/mx_create_list.c \
     src/mx_dir_arr.c \
     src/mx_fill_buffer.c \
     src/mx_find_flag.c \
@@ -40,6 +43,7 @@ SRCF = \
     src/mx_number_of_flags.c \
     src/mx_print_illegal.c \
     src/mx_print_wrong_dir.c \
+    src/mx_push_data_back.c \
     src/mx_status.c \
 
 OBJ = $(SRC:.c=.o)
@@ -49,6 +53,7 @@ OBJO = \
     obj/mx_check_arr_dir.o \
     obj/mx_create_data.o \
     obj/mx_create_flags_struct.o \
+    obj/mx_create_list.o \
     obj/mx_dir_arr.o \
     obj/mx_fill_buffer.o \
     obj/mx_find_flag.o \
@@ -59,6 +64,7 @@ OBJO = \
     obj/mx_number_of_flags.o \
     obj/mx_print_illegal.o \
     obj/mx_print_wrong_dir.o \
+    obj/mx_push_data_back.o \
     obj/mx_status.o \
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic

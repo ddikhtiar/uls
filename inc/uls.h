@@ -66,13 +66,6 @@ typedef struct s_data {
     struct s_data *next;
 } t_data;
 
-/*
-typedef struct s_node {
-    struct s_data *cur_data;
-    struct s_node *next;
-} t_node;
-*/
-
 typedef struct s_d_list {
     struct s_data *link;
     struct s_d_list *next_list;
@@ -80,10 +73,10 @@ typedef struct s_d_list {
 
 int mx_number_of_dir(char **arr); //Возвращает кол-во дирректорий
 int mx_number_of_flags(char **arr); //Возвращает кол-во флагов
-char **mx_dir_arr(int argc, char **arr); //Возвращает массив названий дирректорий
+char **mx_dir_arr(int argc, char **arr); //Возвращает массив названий дир-рий
 char **mx_flags_arr(int argc, char **arr); //Возвращает массив флагов
 //void mx_flags_out(char **arr);
-char **mx_arr_filenames(const char *dir_name); //Возвращает массив названий
+//char **mx_arr_filenames(const char *dir_name); //Возвращает массив названий
                                                //файлов из заданной папки
 t_flags *mx_create_flags_struct(char ***arr_str); //Создает структуру флагов
 bool mx_legal_flag(char ***arr_str); //Проверяет флаги на валидность
@@ -98,10 +91,17 @@ bool mx_legal_dirname(const char *name); //Проверяет, является 
                                          //строка именем файла/папки/ссылкой
 void mx_print_wrong_dir(const char *name); //Выводит ошибку, если указано
                                            //неверное имя файла/папки
-bool mx_status(struct stat buf); //
-t_data *mx_create_data(char *filename); //Создает лист с данными о файле
+bool mx_status(struct stat buf); //Часть mx_legal_dirname()
+t_data *mx_create_data(const char *filename); //Создает лист с данными о файле
 struct stat *mx_fill_buffer(const char *filename); //Заполняет буффер
                                                    //в листе данными из stat
+void mx_push_data_back(t_data **list, const char *filename); //Добавляет лист
+                                                             //с данными файла
+                                                             //в конец списка
+t_d_list *mx_create_list(t_data *data); //Создает лист со списком данных
+void mx_push_list_back(t_d_list **first, t_d_list *list) //Добавляет список
+                                                         //данных в конец
+                                                         //списка списков
 //t_node *mx_create_node(t_data *current);
 //t_node *mx_get_filenames(const char *dir_name);
 
