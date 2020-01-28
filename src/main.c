@@ -18,26 +18,26 @@ int main (int argc, char **argv) {
         exit(1);
     list = mx_list_assembly(&flags, &dirs_names);
     sx_print_list(list);
-    // system("leaks uls");
+    system("leaks uls");
         exit(0);
-    mx_printstr("FLAGS:");
-    mx_printchar('\n');
-    sx_print_arr(&flags_names);
-    mx_printstr("DIRECTORIES:");
-    mx_printchar('\n');
-    sx_print_arr(&dirs_names);
+    // mx_printstr("FLAGS:");
+    // mx_printchar('\n');
+    // sx_print_arr(&flags_names);
+    // mx_printstr("DIRECTORIES:");
+    // mx_printchar('\n');
+    // sx_print_arr(&dirs_names);
     // list = mx_list_assembly(&flags, &dirs_names);
 
-// check "| cat -e"
-    if(isatty(1)) printf ("is a character device\n");
-    else printf("is not a character device\n");
+// // check "| cat -e"
+//     if(isatty(1)) printf ("is a character device\n");
+//     else printf("is not a character device\n");
 
-// getting width of terminal
-    struct winsize sz;
-    ioctl(0, TIOCGWINSZ, &sz);
-    printf("Screen width: %i  Screen height: %i\n", sz.ws_col, sz.ws_row);
+// // getting width of terminal
+//     struct winsize sz;
+//     ioctl(0, TIOCGWINSZ, &sz);
+//     printf("Screen width: %i  Screen height: %i\n", sz.ws_col, sz.ws_row);
    
-    system("leaks uls");
+//     system("leaks uls");
 }
 
 static void sx_print_list(t_d_list *list) {
@@ -51,7 +51,7 @@ static void sx_print_list(t_d_list *list) {
         while (current) {
             mx_printstr(current->name);
             if (current->buffer == NULL)
-                mx_printchar('*');
+                mx_printchar('#');
             mx_printstr(" -> ");
             if (current->next == NULL)
                 mx_printstr("(NULL)\n");

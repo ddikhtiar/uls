@@ -4,6 +4,8 @@ void mx_list_current_dir(t_flags **flags, t_d_list **list) {
     t_d_list *list_ptr = *list;
     DIR *dirname = opendir(list_ptr->link->name );
     struct dirent *filename = NULL;
+    char *str = NULL;
+    char *str1 = NULL;
 
     while ((filename = readdir(dirname)) != NULL) {
         // if ((*flags)->f_A == 1) {
@@ -15,7 +17,11 @@ void mx_list_current_dir(t_flags **flags, t_d_list **list) {
         //     continue;
         
         if ((*flags)->illegal != 1) {
-            mx_push_data_back(&(list_ptr->link), filename->d_name);
+            str1 = mx_strjoin(list_ptr->link->name, "/");
+            str = mx_strjoin(str1, filename->d_name);
+            mx_push_data_back(&(list_ptr->link), str);
+            mx_strdel(&str1);
+            mx_strdel(&str);
         }
     }
     if (closedir(dirname) < 0)
