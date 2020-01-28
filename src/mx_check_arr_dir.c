@@ -2,9 +2,9 @@
 
 static void sx_delete_illegal_dirname(char ***arr_ptr, char **str_ptr);
 static int sx_num_of_wrong(char ***arr_str);
+static void sx_flies_without_cutlets(int num, char ***d_true, char ***d_false);
 
 int mx_check_arr_dir(char ***arr_dirname) {
-    char **arr = *arr_dirname;
     char **illegal = NULL;
     int wrong = 0;
 
@@ -13,21 +13,28 @@ int mx_check_arr_dir(char ***arr_dirname) {
     if ((wrong = sx_num_of_wrong(arr_dirname)) > 0) {
         illegal = (char **) malloc(sizeof(char *) * (wrong + 1));
         illegal[wrong] = NULL;
-        while (*arr) {
-            if (!mx_legal_dirname(*arr)) {
-                illegal[wrong - 1] = mx_strdup(*arr);
-                sx_delete_illegal_dirname(arr_dirname, arr);
-                wrong--;
-                continue;
-            }
-            arr++;
-        }
+        sx_flies_without_cutlets(wrong, arr_dirname, &illegal);
         mx_print_wrong_dir(&illegal);
     }
     if (mx_number_of_dir(*arr_dirname) == 0)
         return -1;
     else
         return 1;
+}
+
+static void sx_flies_without_cutlets(int num, char ***d_true, char ***d_false) {
+    char **illegal = *d_false;
+    char **arr = *d_true;
+
+    while (*arr) {
+        if (!mx_legal_dirname(*arr)) {
+            illegal[num - 1] = mx_strdup(*arr);
+            sx_delete_illegal_dirname(d_true, arr);
+            num--;
+            continue;
+        }
+        arr++;
+    }
 }
 
 static void sx_delete_illegal_dirname(char ***arr_ptr, char **str_ptr) {
