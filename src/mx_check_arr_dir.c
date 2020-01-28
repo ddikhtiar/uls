@@ -12,6 +12,7 @@ int mx_check_arr_dir(char ***arr_dirname) {
         return 0;
     if ((wrong = sx_num_of_wrong(arr_dirname)) > 0) {
         illegal = (char **) malloc(sizeof(char *) * (wrong + 1));
+        illegal[wrong] = NULL;
         while (*arr) {
             if (!mx_legal_dirname(*arr)) {
                 illegal[wrong - 1] = mx_strdup(*arr);
@@ -21,7 +22,6 @@ int mx_check_arr_dir(char ***arr_dirname) {
             }
             arr++;
         }
-        illegal[wrong] = NULL;
         mx_print_wrong_dir(&illegal);
     }
     if (mx_number_of_dir(*arr_dirname) == 0)

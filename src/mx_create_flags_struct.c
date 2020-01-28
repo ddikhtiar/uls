@@ -27,7 +27,7 @@ t_flags *mx_create_flags_struct(char ***arr_str) {
 }
 
 static void sx_modify(t_flags **flags, char ***arr_str) {
-    if (*arr == NULL)
+    if (*arr_str == NULL)
         return;
     if (!mx_legal_flag(arr_str)) {
         (*flags)->illegal = 1;
