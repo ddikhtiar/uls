@@ -12,6 +12,8 @@
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/xattr.h>
+#include <sys/ioctl.h>
 
 #define ANSI_COLOR_RED        "\x1b[31m"
 #define ANSI_COLOR_GREEN      "\x1b[32m"
