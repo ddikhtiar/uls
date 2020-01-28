@@ -4,7 +4,7 @@ void mx_push_data_back(t_data **list, const char *filename) {
     t_data *data = mx_create_data(filename);
     t_data *last = NULL;
 
-    if (!data)
+    if (data == NULL)
         return;
     else if (*list == NULL)
         *list = data;

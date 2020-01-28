@@ -75,9 +75,6 @@ int mx_number_of_dir(char **arr); //Возвращает кол-во дирре�
 int mx_number_of_flags(char **arr); //Возвращает кол-во флагов
 char **mx_dir_arr(int argc, char **arr); //Возвращает массив названий дир-рий
 char **mx_flags_arr(int argc, char **arr); //Возвращает массив флагов
-//void mx_flags_out(char **arr);
-//char **mx_arr_filenames(const char *dir_name); //Возвращает массив названий
-                                               //файлов из заданной папки
 t_flags *mx_create_flags_struct(char ***arr_str); //Создает структуру флагов
 bool mx_legal_flag(char ***arr_str); //Проверяет флаги на валидность
 void mx_print_illegal(char ***arr_str); //Выводит ошибку, если найден
@@ -103,7 +100,7 @@ void mx_push_list_back(t_d_list **first, t_d_list *list); //Добавляет �
                                                          //данных в конец
                                                          //списка списков
 t_d_list *mx_list_assembly(t_flags **flags, char ***names);
-//t_node *mx_create_node(t_data *current);
-//t_node *mx_get_filenames(const char *dir_name);
+void mx_push_list_front(t_d_list **list, t_data *data);
+void mx_list_current_dir(t_flags **flags, t_d_list **list);
 
 #endif
