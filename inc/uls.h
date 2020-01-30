@@ -2,6 +2,7 @@
 #define ULS_H
 
 #include "libmx/inc/libmx.h"
+#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -69,6 +70,7 @@ typedef struct s_data {
 } t_data;
 
 typedef struct s_d_list {
+    char *path;
     struct s_data *link;
     struct s_d_list *next_list;
 } t_d_list;

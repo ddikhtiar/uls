@@ -5,6 +5,7 @@ t_d_list *mx_create_list(t_data *data) {
 
     if (!list)
         return NULL;
+    list->path = NULL;
     list->link = data;
     list->next_list = NULL;
     return list;
