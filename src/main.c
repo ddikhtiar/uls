@@ -18,8 +18,8 @@ int main (int argc, char **argv) {
         exit(1);
     list = mx_list_assembly(&flags, &dirs_names);
     sx_print_list(list);
-    system("leaks uls");
-        exit(0);
+    // system("leaks uls");
+    //     exit(0);
     // mx_printstr("FLAGS:");
     // mx_printchar('\n');
     // sx_print_arr(&flags_names);
