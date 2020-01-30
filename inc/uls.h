@@ -60,19 +60,19 @@ typedef struct s_flags {
     int f_S; //Сортирует файлы по размеру
     int f_T; //Показывает полное время изменения файла от года до секунд
     int f_R; //Рекурсивный вывод всех файлов и папок с вложенными файлами
-    int illegal;
+    int illegal; //Присутствует не ликвидный флаг/прекращает работу программы
 } t_flags;
 
 typedef struct s_data {
-    char *name;
-    struct stat *buffer;
-    struct s_data *next;
+    char *name;          //Имя файла
+    struct stat *buffer; //Данные stat'a
+    struct s_data *next; //Ссылка на следующий лист
 } t_data;
 
 typedef struct s_d_list {
-    char *path;
-    struct s_data *link;
-    struct s_d_list *next_list;
+    char *path;                 //Путь к файлу из дерриктории с бинарником
+    struct s_data *link;        //Список с данными файлов
+    struct s_d_list *next_list; //Ссылка на следующий лист со списком данных
 } t_d_list;
 
 int mx_number_of_dir(char **arr); //Возвращает кол-во дирректорий
@@ -99,12 +99,12 @@ struct stat *mx_fill_buffer(const char *filename); //Заполняет буфф
 void mx_push_data_back(t_data **list, const char *filename); //Добавляет лист
                                                              //с данными файла
                                                              //в конец списка
-t_d_list *mx_create_list(t_data *data); //Создает лист со списком данных
-void mx_push_list_back(t_d_list **first, t_d_list *list); //Добавляет список
+t_d_list *mx_create_list(const char *dirname, t_data *data); //Создает лист со списком данных
+       //void mx_push_list_back(t_d_list **first, t_d_list *list); //Добавляет список
                                                          //данных в конец
                                                          //списка списков
-t_d_list *mx_list_assembly(t_flags **flags, char ***names);
-void mx_push_list_front(t_d_list **list, t_data *data);
-void mx_list_current_dir(t_flags **flags, t_d_list **list);
+       //t_d_list *mx_list_assembly(t_flags **flags, char ***names);
+       //void mx_push_list_front(t_d_list **list, t_data *data);
+       //void mx_list_current_dir(t_flags **flags, t_d_list **list);
 
 #endif
