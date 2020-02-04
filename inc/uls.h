@@ -85,13 +85,13 @@ void mx_print_illegal(char ***arr_str); //Выводит ошибку, если 
                                         //не валидный флаг
 bool mx_find_flag(char ***arr_str, char f_char); //Проверяет наличие флага
                                                  //во входящем массиве
-int mx_check_arr_dir(char ***arr_dirname); //Проверяет входящий массив папок,
-                                            //удаляет не валидные названия
-                                            //и выводит ошибку "No such..."
+int mx_check_arr_dir(int flg, char ***arr_dirname); //Проверяет входящий --->
+// ---> массив папок, удаляет не валидные названи и выводит ошибку "No such.."
 bool mx_legal_dirname(const char *name); //Проверяет, является ли указанная
                                          //строка именем файла/папки/ссылкой
 void mx_print_wrong_dir(char ***arr_del); //Выводит ошибку, если указано
                                           //неверное имя файла/папки
+void mx_sort_arrstr(int flag_r, char ***arr_str); //Сортировка по ASCII +/-
 bool mx_status(struct stat buf); //Часть mx_legal_dirname()
 t_data *mx_create_data(const char *filename); //Создает лист с данными о файле
 struct stat *mx_fill_buffer(const char *filename); //Заполняет буффер

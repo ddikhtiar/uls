@@ -14,7 +14,7 @@ int main (int argc, char **argv) {
     // }
     if (flags->illegal == 1)
         exit(1);
-    if (mx_check_arr_dir(&dirs_names) == -1)
+    if (mx_check_arr_dir(flags->f_r, &dirs_names) == -1)
         exit(1);
     list = mx_list_assembly(&flags, &dirs_names);
     sx_print_list(list);
