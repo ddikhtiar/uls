@@ -7,7 +7,7 @@ t_d_list *mx_list_assembly(t_flags **flags, char ***names) {
     char **arr_ptr = *names;
 
     while (*arr_ptr) {
-        current = mx_create_data(*arr_ptr);
+        current = mx_create_data(*arr_ptr, *arr_ptr);
         if (MX_ISREG(current->buffer->st_mode)) {
             mx_push_data_back(&files, current);
             if (list == NULL || list->path != NULL)

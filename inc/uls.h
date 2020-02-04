@@ -93,10 +93,11 @@ void mx_print_wrong_dir(char ***arr_del); //Выводит ошибку, есл�
                                           //неверное имя файла/папки
 void mx_sort_arrstr(int flag_r, char ***arr_str); //Сортировка по ASCII +/-
 bool mx_status(struct stat buf); //Часть mx_legal_dirname()
-t_data *mx_create_data(const char *filename); //Создает лист с данными о файле
+t_data *mx_create_data(const char *path, const char *filename); // ---> 
+// ---> Создает лист с данными о файле
 struct stat *mx_fill_buffer(const char *filename); //Заполняет буффер
                                                    //в листе данными из stat
-void mx_push_data_back(t_data **list, const char *filename); //Добавляет лист
+void mx_push_data_back(t_data **list, t_data *last); //Добавляет лист
                                                              //с данными файла
                                                              //в конец списка
 t_d_list *mx_create_list(t_data *pathname, t_data *data);   // --->
@@ -111,5 +112,6 @@ void mx_for_dir_to_list(t_flags **flags, t_d_list **list);  // --->
 // ---> Добаляет файлы в список соотв. папки (рекурсивная)
 void mx_sort_list(t_flags **flags, t_d_list **list);        // --->
 // ---> Сортирует список согласно флагам
+void mx_open_dir(t_flags **flags, t_d_list **list);
 
 #endif
