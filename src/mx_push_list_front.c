@@ -1,11 +1,14 @@
 #include "uls.h"
 
-void mx_push_list_front(t_d_list **list, t_data *data) {
-    t_d_list *new = mx_create_list(data);
-    t_d_list *first = *list;
+void mx_push_list_front(t_d_list **list, t_d_list *first) {
+    t_d_list *ptr = *list;
 
-    if (new) {
-        new->next_list = first;
-        *list = new;
+    if (!first)
+        return;
+    else if (*list == NULL)
+        *list = first;
+    else {
+        first->next_list = ptr;
+        *list = first; 
     }
 }

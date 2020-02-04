@@ -99,12 +99,13 @@ struct stat *mx_fill_buffer(const char *filename); //Заполняет буфф
 void mx_push_data_back(t_data **list, const char *filename); //Добавляет лист
                                                              //с данными файла
                                                              //в конец списка
-t_d_list *mx_create_list(const char *dirname, t_data *data); //Создает лист со списком данных
-       //void mx_push_list_back(t_d_list **first, t_d_list *list); //Добавляет список
-                                                         //данных в конец
-                                                         //списка списков
+t_d_list *mx_create_list(const char *pathname, t_data *data); //Создает лист со
+                                                             //списком данных
+void mx_push_list_back(t_d_list **list, t_d_list *last);
+                 //Добавляет список данных в конец списка списков
+void mx_push_list_front(t_d_list **list, t_d_list *first);
+                 //Добавляет список данных в начало списка списков
        //t_d_list *mx_list_assembly(t_flags **flags, char ***names);
-       //void mx_push_list_front(t_d_list **list, t_data *data);
        //void mx_list_current_dir(t_flags **flags, t_d_list **list);
 
 #endif

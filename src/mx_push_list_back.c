@@ -1,15 +1,15 @@
 #include "uls.h"
 
-void mx_push_list_back(t_d_list **first, t_d_list *list) {
-    t_d_list *last = *first;
+void mx_push_list_back(t_d_list **list, t_d_list *last) {
+    t_d_list *ptr = *list;
 
-    if (!list)
+    if (!last)
         return;
-    else if (*first == NULL)
-        *first = list;
+    else if (*list == NULL)
+        *list = last;
     else {
-        while (last->next_list != NULL)
-            last = last->next_list;
-        last->next_list = list;
+        while (ptr->next_list != NULL)
+            ptr = ptr->next_list;
+        ptr->next_list = last;
     }
 }
