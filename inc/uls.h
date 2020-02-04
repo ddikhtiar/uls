@@ -70,7 +70,7 @@ typedef struct s_data {
 } t_data;
 
 typedef struct s_d_list {
-    char *path;                 //Путь к файлу из дерриктории с бинарником
+    struct s_data *path;        //Имя папки с данными о ней (1 лист)
     struct s_data *link;        //Список с данными файлов
     struct s_d_list *next_list; //Ссылка на следующий лист со списком данных
 } t_d_list;
@@ -91,7 +91,7 @@ int mx_check_arr_dir(char ***arr_dirname); //Проверяет входящий
 bool mx_legal_dirname(const char *name); //Проверяет, является ли указанная
                                          //строка именем файла/папки/ссылкой
 void mx_print_wrong_dir(char ***arr_del); //Выводит ошибку, если указано
-                                           //неверное имя файла/папки
+                                          //неверное имя файла/папки
 bool mx_status(struct stat buf); //Часть mx_legal_dirname()
 t_data *mx_create_data(const char *filename); //Создает лист с данными о файле
 struct stat *mx_fill_buffer(const char *filename); //Заполняет буффер
@@ -99,13 +99,17 @@ struct stat *mx_fill_buffer(const char *filename); //Заполняет буфф
 void mx_push_data_back(t_data **list, const char *filename); //Добавляет лист
                                                              //с данными файла
                                                              //в конец списка
-t_d_list *mx_create_list(const char *pathname, t_data *data); //Создает лист со
-                                                             //списком данных
-void mx_push_list_back(t_d_list **list, t_d_list *last);
-                 //Добавляет список данных в конец списка списков
-void mx_push_list_front(t_d_list **list, t_d_list *first);
-                 //Добавляет список данных в начало списка списков
-       //t_d_list *mx_list_assembly(t_flags **flags, char ***names);
-       //void mx_list_current_dir(t_flags **flags, t_d_list **list);
+t_d_list *mx_create_list(t_data *pathname, t_data *data);   // --->
+// ---> Создает лист со списком данных
+void mx_push_list_back(t_d_list **list, t_d_list *last);    // --->
+// ---> Добавляет список данных в конец списка списков
+void mx_push_list_front(t_d_list **list, t_d_list *first);  // --->
+// ---> Добавляет список данных в начало списка списков
+t_d_list *mx_list_assembly(t_flags **flags, char ***names); // --->
+// ---> Создает полный список списков с данными
+void mx_for_dir_to_list(t_flags **flags, t_d_list **list);  // --->
+// ---> Добаляет файлы в список соотв. папки (рекурсивная)
+void mx_sort_list(t_flags **flags, t_d_list **list);        // --->
+// ---> Сортирует список согласно флагам
 
 #endif

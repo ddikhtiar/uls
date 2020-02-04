@@ -1,17 +1,15 @@
 #include "uls.h"
 
-void mx_push_data_back(t_data **list, const char *filename) {
-    t_data *data = mx_create_data(filename);
-    t_data *last = NULL;
+void mx_push_data_back(t_data **list, t_data *last) {
+    t_data *ptr = *list;
 
-    if (data == NULL)
+    if (last == NULL)
         return;
     else if (*list == NULL)
-        *list = data;
+        *list = last;
     else {
-        last = *list;
-        while (last->next != NULL)
-            last = last->next;
-        last->next = data;
+        while (ptr->next != NULL)
+            ptr = ptr->next;
+        ptr->next = last;
     }
 }
