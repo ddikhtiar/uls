@@ -15,8 +15,8 @@ int mx_check_arr_dir(int flg, char ***arr_dirname) {
         illegal[wrong] = NULL;
         sx_parse(wrong, arr_dirname, &illegal);
         mx_print_wrong_dir(&illegal);
-        mx_sort_arrstr(flg, arr_dirname);
     }
+    mx_sort_arrstr(flg, arr_dirname);
     if (mx_number_of_dir(*arr_dirname) == 0)
         return -1;
     else

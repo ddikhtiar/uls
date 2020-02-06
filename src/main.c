@@ -48,6 +48,9 @@ static void sx_print_list(t_d_list *list) {
         return;
     while (ptr) {
         current = ptr->link;
+        mx_printstr("===(");
+        mx_printstr(ptr->path->name);
+        mx_printstr(")===\n");
         while (current) {
             mx_printstr(current->name);
             if (current->buffer == NULL)

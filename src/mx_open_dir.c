@@ -8,6 +8,13 @@ void mx_open_dir(t_flags **flags, t_d_list **list) {
     char *path = NULL;
 
     while ((file = readdir(dirname)) != NULL) {
+        if ((*flags)->f_a == 0 && (*flags)->f_A == 0
+            && file->d_name[0] == '.')
+            continue;
+        if ((*flags)->f_A == 1 && mx_strcmp(file->d_name, ".") == 0)
+            continue;
+        if ((*flags)->f_A == 1 && mx_strcmp(file->d_name, "..") == 0)
+            continue;
         pathname_begin = mx_strjoin(ptr->path->name, "/");
         path = mx_strjoin(pathname_begin, file->d_name);
         mx_push_data_back(&(ptr->link), mx_create_data(path, file->d_name));

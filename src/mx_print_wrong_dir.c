@@ -3,7 +3,7 @@
 void mx_print_wrong_dir(char ***arr_del) {
     char **ptr = NULL;
 
-    mx_sort_arrstr(0, arr_del)
+    mx_sort_arrstr(0, arr_del);
     ptr = *arr_del;
     while (*ptr) {
         mx_printerr("uls: ");

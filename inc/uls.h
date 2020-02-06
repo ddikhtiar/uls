@@ -34,14 +34,14 @@
 #define MX_ISSOCK(m) (((m) & S_IFMT) == S_IFSOCK)
 
 /*
-#define MX_ISREG(m) (((m) & 0170000) == 0100000)
-#define MX_ISDIR(m) (((m) & 0170000) == 0040000)
-#define MX_ISLNK(m) (((m) & 0170000) == 0120000)
-#define MX_ISCHR(m) (((m) & 0170000) == 0020000)
-#define MX_ISBLK(m) (((m) & 0170000) == 0060000)
-#define MX_ISFIFO(m) (((m) & 0170000) == 0010000)
-#define MX_ISSOCK(m) (((m) & 0170000) == 0140000)
-*/
+ * #define MX_ISREG(m) (((m) & 0170000) == 0100000)
+ * #define MX_ISDIR(m) (((m) & 0170000) == 0040000)
+ * #define MX_ISLNK(m) (((m) & 0170000) == 0120000)
+ * #define MX_ISCHR(m) (((m) & 0170000) == 0020000)
+ * #define MX_ISBLK(m) (((m) & 0170000) == 0060000)
+ * #define MX_ISFIFO(m) (((m) & 0170000) == 0010000)
+ * #define MX_ISSOCK(m) (((m) & 0170000) == 0140000)
+ */
 
 typedef struct s_flags {
     int f_a; //Включает в список файлы и папки, начинающиеся с '.'
@@ -98,8 +98,8 @@ t_data *mx_create_data(const char *path, const char *filename); // --->
 struct stat *mx_fill_buffer(const char *filename); //Заполняет буффер
                                                    //в листе данными из stat
 void mx_push_data_back(t_data **list, t_data *last); //Добавляет лист
-                                                             //с данными файла
-                                                             //в конец списка
+                                                     //с данными файла
+                                                     //в конец списка
 t_d_list *mx_create_list(t_data *pathname, t_data *data);   // --->
 // ---> Создает лист со списком данных
 void mx_push_list_back(t_d_list **list, t_d_list *last);    // --->
@@ -109,9 +109,12 @@ void mx_push_list_front(t_d_list **list, t_d_list *first);  // --->
 t_d_list *mx_list_assembly(t_flags **flags, char ***names); // --->
 // ---> Создает полный список списков с данными
 void mx_for_dir_to_list(t_flags **flags, t_d_list **list);  // --->
-// ---> Добаляет файлы в список соотв. папки (рекурсивная)
-void mx_sort_list(t_flags **flags, t_d_list **list);        // --->
+// ---> Добаляет файлы в списки соотв. папок (рекурсивная)
+void mx_sort_lists_list(t_flags **flags, t_d_list **list);        // --->
 // ---> Сортирует список согласно флагам
-void mx_open_dir(t_flags **flags, t_d_list **list);
+void mx_open_dir(t_flags **flags, t_d_list **list);         // --->
+// ---> Добавляет файлы из папки в соотв. ей список
+void mx_plus_insight_dir(t_d_list **list);                  // --->
+// ---> Добавляет в список списков новый лист папки
 
 #endif
