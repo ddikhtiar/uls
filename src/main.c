@@ -17,6 +17,7 @@ int main (int argc, char **argv) {
     if (mx_check_arr_dir(flags->f_r, &dirs_names) == -1)
         exit(1);
     list = mx_list_assembly(&flags, &dirs_names);
+    // sx_print_list(NULL);
     sx_print_list(list);
     // system("leaks uls");
     //     exit(0);
@@ -37,7 +38,7 @@ int main (int argc, char **argv) {
 //     ioctl(0, TIOCGWINSZ, &sz);
 //     printf("Screen width: %i  Screen height: %i\n", sz.ws_col, sz.ws_row);
    
-//     system("leaks uls");
+    // system("leaks uls");
 }
 
 static void sx_print_list(t_d_list *list) {
