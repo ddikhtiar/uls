@@ -1,32 +1,31 @@
 #include "uls.h"
 
+static bool sx_stop_segfault(const char *str);
+
 void mx_plus_insight_dir(t_d_list **list) {
     t_d_list *ptr = *list;
-    t_d_list *some = ptr;
+    t_d_list *som = ptr;
     t_d_list *second = NULL;
-    t_data *file = ptr->link;
-    char *start_path = NULL;
-    char *full_path = NULL;
+    char *path = NULL;
 
-    while (file != NULL) {
-        if (mx_strcmp(file->name, ".") == 0) {
-            file = file->next;
+    for (t_data *file = ptr->link; file != NULL; file = file->next) {
+        if (!sx_stop_segfault(file->name))
             continue;
-        }
-        if (mx_strcmp(file->name, "..") == 0) {
-            file = file->next;
-            continue;
-        }
         if (MX_ISDIR(file->buffer->st_mode)) {
-            start_path = mx_strjoin(ptr->path->name, "/");
-            full_path = mx_strjoin(start_path, file->name);
-            second = some->next_list;
-            some->next_list = mx_create_list(mx_create_data(full_path, full_path), NULL);
-            some->next_list->next_list = second;
-            some = some->next_list;
-            mx_strdel(&start_path);
-            mx_strdel(&full_path);
+            path = mx_make_pathname(ptr->path->name, file->name);
+            second = som->next_list;
+            som->next_list = mx_create_list(mx_create_data(path, path), NULL);
+            som->next_list->next_list = second;
+            som = som->next_list;
+            mx_strdel(&path);
         }
-        file = file->next;
     }
+}
+
+static bool sx_stop_segfault(const char *str) {
+    if (mx_strcmp(str, ".") == 0)
+        return false;
+    if (mx_strcmp(str, "..") == 0)
+        return false;
+    return true;
 }

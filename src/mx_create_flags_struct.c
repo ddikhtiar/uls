@@ -2,6 +2,7 @@
 
 static void sx_modify(t_flags **flags, char ***arr_str);
 static void sx_modify_end(t_flags **flags, char ***arr_str);
+static void sx_modify_end_end(t_flags **flags, char ***arr_str);
 
 t_flags *mx_create_flags_struct(char ***arr_str) {
     t_flags *flags = (t_flags *) malloc(sizeof(t_flags));
@@ -20,8 +21,8 @@ t_flags *mx_create_flags_struct(char ***arr_str) {
     flags->f_c = 0;
     flags->f_S = 0;
     flags->f_T = 0;
-	flags->f_R = 0;
-	flags->illegal = 0;
+    flags->f_R = 0;
+    flags->illegal = 0;
     sx_modify(&flags, arr_str);
     return flags;
 }
@@ -33,36 +34,49 @@ static void sx_modify(t_flags **flags, char ***arr_str) {
         (*flags)->illegal = 1;
         mx_print_illegal(arr_str);
     }
-	else {
+    else {
         if (mx_find_flag(arr_str, 'a'))
             (*flags)->f_a = 1;
-		if (mx_find_flag(arr_str, 'A'))
+        if (mx_find_flag(arr_str, 'A'))
             (*flags)->f_A = 1;
         if (mx_find_flag(arr_str, 'l'))
             (*flags)->f_l = 1;
-        if (mx_find_flag(arr_str, '1'))
+        if (mx_find_flag(arr_str, '1')) {
             (*flags)->f_1 = 1;
-		sx_modify_end(flags, arr_str);
+            (*flags)->f_C = 0;
+        }
+        sx_modify_end(flags, arr_str);
+        mx_check_flags_conflict(flags);
     }
 }
 
 static void sx_modify_end(t_flags **flags, char ***arr_str) {
     if (mx_find_flag(arr_str, 'G'))
         (*flags)->f_G = 1;
-    if (mx_find_flag(arr_str, 'C'))
+    if (mx_find_flag(arr_str, 'C')) {
         (*flags)->f_C = 1;
+        (*flags)->f_1 = 0;
+    }
     if (mx_find_flag(arr_str, 'r'))
         (*flags)->f_r = 1;
     if (mx_find_flag(arr_str, 't'))
         (*flags)->f_t = 1;
-    if (mx_find_flag(arr_str, 'u'))
-        (*flags)->f_u = 1;
-    if (mx_find_flag(arr_str, 'c'))
-        (*flags)->f_c = 1;
     if (mx_find_flag(arr_str, 'S'))
         (*flags)->f_S = 1;
     if (mx_find_flag(arr_str, 'T'))
         (*flags)->f_T = 1;
     if (mx_find_flag(arr_str, 'R'))
         (*flags)->f_R = 1;
+    sx_modify_end_end(flags, arr_str);
+}
+
+static void sx_modify_end_end(t_flags **flags, char ***arr_str) {
+    if (mx_find_flag(arr_str, 'u')) {
+        (*flags)->f_u = 1;
+        (*flags)->f_c = 0;
+    }
+    if (mx_find_flag(arr_str, 'c')) {
+        (*flags)->f_c = 1;
+        (*flags)->f_u = 0;
+    }
 }

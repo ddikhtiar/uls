@@ -1,6 +1,5 @@
 #include "uls.h"
-
-// static void sx_print_arr(char ***arr_str);
+ 
 static void sx_print_list(t_d_list *list);
 
 int main (int argc, char **argv) {
@@ -21,13 +20,6 @@ int main (int argc, char **argv) {
     sx_print_list(list);
     // system("leaks uls");
     //     exit(0);
-    // mx_printstr("FLAGS:");
-    // mx_printchar('\n');
-    // sx_print_arr(&flags_names);
-    // mx_printstr("DIRECTORIES:");
-    // mx_printchar('\n');
-    // sx_print_arr(&dirs_names);
-    // list = mx_list_assembly(&flags, &dirs_names);
 
 // // check "| cat -e"
 //     if(isatty(1)) printf ("is a character device\n");
@@ -37,8 +29,7 @@ int main (int argc, char **argv) {
 //     struct winsize sz;
 //     ioctl(0, TIOCGWINSZ, &sz);
 //     printf("Screen width: %i  Screen height: %i\n", sz.ws_col, sz.ws_row);
-   
-    // system("leaks uls");
+//     system("leaks uls");
 }
 
 static void sx_print_list(t_d_list *list) {
@@ -67,15 +58,3 @@ static void sx_print_list(t_d_list *list) {
         ptr = ptr->next_list;
     }
 }
-
-// static void sx_print_arr(char ***arr_str) {
-//     char **ptr = *arr_str;
-
-//     if (!ptr)
-//         return;
-//     while (*ptr) {
-//         mx_printstr(*ptr);
-//         mx_printchar('\n');
-//         ptr++;
-//     }
-// }

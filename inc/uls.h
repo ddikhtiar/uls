@@ -87,6 +87,7 @@ bool mx_find_flag(char ***arr_str, char f_char); //Проверяет налич
                                                  //во входящем массиве
 int mx_check_arr_dir(int flg, char ***arr_dirname); //Проверяет входящий --->
 // ---> массив папок, удаляет не валидные названи и выводит ошибку "No such.."
+void mx_check_flags_conflict(t_flags **flags); //Совместимость флагов
 bool mx_legal_dirname(const char *name); //Проверяет, является ли указанная
                                          //строка именем файла/папки/ссылкой
 void mx_print_wrong_dir(char ***arr_del); //Выводит ошибку, если указано
@@ -110,11 +111,25 @@ t_d_list *mx_list_assembly(t_flags **flags, char ***names); // --->
 // ---> Создает полный список списков с данными
 void mx_for_dir_to_list(t_flags **flags, t_d_list **list);  // --->
 // ---> Добаляет файлы в списки соотв. папок (рекурсивная)
-void mx_sort_lists_list(t_flags **flags, t_d_list **list);        // --->
+void mx_sort_lists_list(t_flags **flags, t_d_list **list);  // --->
 // ---> Сортирует список согласно флагам
 void mx_open_dir(t_flags **flags, t_d_list **list);         // --->
 // ---> Добавляет файлы из папки в соотв. ей список
 void mx_plus_insight_dir(t_d_list **list);                  // --->
 // ---> Добавляет в список списков новый лист папки
+void mx_swap_data(t_data **first, t_data **second);         // --->
+// ---> Меняет местами листы в списке данных
+void mx_swap_list(t_d_list **first, t_d_list **second);     // --->
+// ---> Меняет местами листы в списке листов
+char *mx_make_pathname(const char *begin, const char *end); // --->
+// ---> Собирает путь к файлу из папки с бинарником
+void mx_sort_datas_list(t_flags **flags, t_d_list **list);  // --->
+// ---> В зависимости от флагов применяет одну из сортировок ниже:
+void mx_ascii_sort(t_data **data_list);  //Сорт. в алфавитном порядке
+void mx_sort_size(t_data **data_list);   //Сорт. по размеру
+void mx_sort_a_time(t_data **data_list); //Сорт. по времени посл. доступа
+void mx_sort_c_time(t_data **data_list); //Сорт. по времени посл. изменения
+void mx_sort_m_time(t_data **data_list); //Сорт. по времени посл. модификации
+void mx_reverse_all(t_data **data_list); //Меняет порядок на обратный
 
 #endif
