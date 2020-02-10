@@ -37,6 +37,7 @@ SRC = \
     mx_status.c \
     mx_swap_data.c \
     mx_swap_list.c \
+    mx_output_multicolumn.c \
 
 SRCF = \
     src/main.c \
@@ -67,6 +68,7 @@ SRCF = \
     src/mx_status.c \
     src/mx_swap_data.c \
     src/mx_swap_list.c \
+    src/mx_output_multicolumn.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -99,6 +101,7 @@ OBJO = \
     obj/mx_status.o \
     obj/mx_swap_data.o \
     obj/mx_swap_list.o \
+    obj/mx_output_multicolumn.o \
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 
