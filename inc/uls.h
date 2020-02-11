@@ -133,5 +133,6 @@ void mx_sort_m_time(t_data **data_list); //Сорт. по времени пос�
 void mx_reverse_all(t_data **data_list); //Меняет порядок на обратный
 void mx_mc_output(t_d_list *list); //вивід в колонки
 int mx_size_data_list(t_data **data_list); //Количество листов в списке данных
+int mx_count_rows(int elem_count, int col_num); //рахує к-ть рядків для виводу
 
 #endif
