@@ -117,9 +117,9 @@ void mx_open_dir(t_flags **flags, t_d_list **list);         // --->
 // ---> Добавляет файлы из папки в соотв. ей список
 void mx_plus_insight_dir(t_d_list **list);                  // --->
 // ---> Добавляет в список списков новый лист папки
-void mx_swap_data(t_data **first, t_data **second);         // --->
+void mx_swap_data(t_data *first, t_data *second);         // --->
 // ---> Меняет местами листы в списке данных
-void mx_swap_list(t_d_list **first, t_d_list **second);     // --->
+void mx_swap_list(t_d_list *first, t_d_list *second);     // --->
 // ---> Меняет местами листы в списке листов
 char *mx_make_pathname(const char *begin, const char *end); // --->
 // ---> Собирает путь к файлу из папки с бинарником
@@ -132,5 +132,6 @@ void mx_sort_c_time(t_data **data_list); //Сорт. по времени пос�
 void mx_sort_m_time(t_data **data_list); //Сорт. по времени посл. модификации
 void mx_reverse_all(t_data **data_list); //Меняет порядок на обратный
 void mx_mc_output(t_d_list *list); //вивід в колонки
+int mx_size_data_list(t_data **data_list); //Количество листов в списке данных
 
 #endif

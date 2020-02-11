@@ -10,6 +10,7 @@ INCF = inc/uls.h
 
 SRC = \
     main.c \
+    mx_ascii_sort.c \
     mx_check_arr_dir.c \
     mx_check_flags_conflict.c \
     mx_create_data.c \
@@ -33,7 +34,11 @@ SRC = \
     mx_push_data_back.c \
     mx_push_list_back.c \
     mx_push_list_front.c \
+    mx_reverse_all.c \
+    mx_size_data_list.c \
+    mx_sort_a_time.c \
     mx_sort_arrstr.c \
+    mx_sort_size.c \
     mx_status.c \
     mx_swap_data.c \
     mx_swap_list.c \
@@ -41,6 +46,7 @@ SRC = \
 
 SRCF = \
     src/main.c \
+    src/mx_ascii_sort.c \
     src/mx_check_arr_dir.c \
     src/mx_check_flags_conflict.c \
     src/mx_create_data.c \
@@ -64,7 +70,11 @@ SRCF = \
     src/mx_push_data_back.c \
     src/mx_push_list_back.c \
     src/mx_push_list_front.c \
+    src/mx_reverse_all.c \
+    src/mx_size_data_list.c \
+    src/mx_sort_a_time.c \
     src/mx_sort_arrstr.c \
+    src/mx_sort_size.c \
     src/mx_status.c \
     src/mx_swap_data.c \
     src/mx_swap_list.c \
@@ -74,6 +84,7 @@ OBJ = $(SRC:.c=.o)
 
 OBJO = \
     obj/main.o \
+    obj/mx_ascii_sort.o \
     obj/mx_check_arr_dir.o \
     obj/mx_check_flags_conflict.o \
     obj/mx_create_data.o \
@@ -97,7 +108,11 @@ OBJO = \
     obj/mx_push_data_back.o \
     obj/mx_push_list_back.o \
     obj/mx_push_list_front.o \
+    obj/mx_reverse_all.o \
+    obj/mx_size_data_list.o \
+    obj/mx_sort_a_time.o \
     obj/mx_sort_arrstr.o \
+    obj/mx_sort_size.o \
     obj/mx_status.o \
     obj/mx_swap_data.o \
     obj/mx_swap_list.o \

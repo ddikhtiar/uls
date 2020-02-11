@@ -18,8 +18,8 @@ int main (int argc, char **argv) {
     list = mx_list_assembly(&flags, &dirs_names);
     // sx_print_list(NULL);
     sx_print_list(list);
-    printf("--- Multicolumn output ---\n");
-    mx_mc_output(list);
+    // printf("--- Multicolumn output ---\n");
+    // mx_mc_output(list);
     // system("leaks uls");
     //     exit(0);
 
