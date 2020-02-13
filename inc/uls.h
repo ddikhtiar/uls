@@ -108,7 +108,7 @@ void mx_push_list_back(t_d_list **list, t_d_list *last);               // --->
 // ---> Добавляет список данных в конец списка списков
 void mx_push_list_front(t_d_list **list, t_d_list *first);             // --->
 // ---> Добавляет список данных в начало списка списков
-t_d_list *mx_list_assembly(t_flags **flags, char ***names);            // --->
+t_d_list *mx_list_full_assembly(t_flags **flags, char ***names);            // --->
 // ---> Создает полный список списков с данными
 void mx_for_dir_to_list(t_flags **flags, t_d_list **list);             // --->
 // ---> Добаляет файлы в списки соотв. папок (рекурсивная)

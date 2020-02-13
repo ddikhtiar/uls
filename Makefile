@@ -29,7 +29,7 @@ SRC = \
     mx_l_sort_size.c \
     mx_legal_dirname.c \
     mx_legal_flag.c \
-    mx_list_assembly.c \
+    mx_list_full_assembly.c \
     mx_make_pathname.c \
     mx_number_of_dir.c \
     mx_number_of_flags.c \
@@ -76,7 +76,7 @@ SRCF = \
     src/mx_l_sort_size.c \
     src/mx_legal_dirname.c \
     src/mx_legal_flag.c \
-    src/mx_list_assembly.c \
+    src/mx_list_full_assembly.c \
     src/mx_make_pathname.c \
     src/mx_number_of_dir.c \
     src/mx_number_of_flags.c \
@@ -125,7 +125,7 @@ OBJO = \
     obj/mx_l_sort_size.o \
     obj/mx_legal_dirname.o \
     obj/mx_legal_flag.o \
-    obj/mx_list_assembly.o \
+    obj/mx_list_full_assembly.o \
     obj/mx_make_pathname.o \
     obj/mx_number_of_dir.o \
     obj/mx_number_of_flags.o \

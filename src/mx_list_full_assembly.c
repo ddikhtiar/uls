@@ -1,6 +1,6 @@
 #include "uls.h"
 
-t_d_list *mx_list_assembly(t_flags **flags, char ***names) {
+t_d_list *mx_list_full_assembly(t_flags **flags, char ***names) {
     t_d_list *list = NULL;
     t_data *files = NULL;
     t_data *current = NULL;

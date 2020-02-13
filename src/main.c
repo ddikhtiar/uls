@@ -15,7 +15,7 @@ int main (int argc, char **argv) {
         exit(1);
     if (mx_check_arr_dir(&dirs_names) == -1)
         exit(1);
-    list = mx_list_assembly(&flags, &dirs_names);
+    list = mx_list_full_assembly(&flags, &dirs_names);
     // sx_print_list(NULL);
     sx_print_list(list);
     // printf("--- Multicolumn output ---\n");
