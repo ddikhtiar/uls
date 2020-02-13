@@ -18,7 +18,8 @@ t_d_list *mx_list_full_assembly(t_flags **flags, char ***names) {
         }
         arr_ptr++;
     }
-    mx_sort_lists_list(flags, &list);
+    if (list->path == NULL)
+        mx_sort_lists_list(flags, &list);
     mx_for_dir_to_list(flags, &list);
     return list;
 }
