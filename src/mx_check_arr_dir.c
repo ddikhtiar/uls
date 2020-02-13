@@ -4,7 +4,7 @@ static void sx_delete_illegal_dirname(char ***arr_ptr, char **str_ptr);
 static int sx_num_of_wrong(char ***arr_str);
 static void sx_parse(int num, char ***d_true, char ***d_false);
 
-int mx_check_arr_dir(int flg, char ***arr_dirname) {
+int mx_check_arr_dir(char ***arr_dirname) {
     char **illegal = NULL;
     int wrong = 0;
 
@@ -16,7 +16,6 @@ int mx_check_arr_dir(int flg, char ***arr_dirname) {
         sx_parse(wrong, arr_dirname, &illegal);
         mx_print_wrong_dir(&illegal);
     }
-    mx_sort_arrstr(flg, arr_dirname);
     if (mx_number_of_dir(*arr_dirname) == 0)
         return -1;
     else

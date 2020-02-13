@@ -1,5 +1,6 @@
 #include "uls.h"
 
+static void sx_push_null(t_flags **fff);
 static void sx_modify(t_flags **flags, char ***arr_str);
 static void sx_modify_end(t_flags **flags, char ***arr_str);
 static void sx_modify_end_end(t_flags **flags, char ***arr_str);
@@ -9,6 +10,14 @@ t_flags *mx_create_flags_struct(char ***arr_str) {
 
     if (flags == NULL)
         return NULL;
+    sx_push_null(&flags);
+    sx_modify(&flags, arr_str);
+    return flags;
+}
+
+static void sx_push_null(t_flags **fff) {
+    t_flags *flags = *fff;
+
     flags->f_a = 0;
     flags->f_A = 0;
     flags->f_l = 0;
@@ -22,9 +31,8 @@ t_flags *mx_create_flags_struct(char ***arr_str) {
     flags->f_S = 0;
     flags->f_T = 0;
     flags->f_R = 0;
+    flags->f_f = 0;
     flags->illegal = 0;
-    sx_modify(&flags, arr_str);
-    return flags;
 }
 
 static void sx_modify(t_flags **flags, char ***arr_str) {
@@ -67,6 +75,8 @@ static void sx_modify_end(t_flags **flags, char ***arr_str) {
         (*flags)->f_T = 1;
     if (mx_find_flag(arr_str, 'R'))
         (*flags)->f_R = 1;
+    if (mx_find_flag(arr_str, 'f'))
+        (*flags)->f_f = 1;
     sx_modify_end_end(flags, arr_str);
 }
 

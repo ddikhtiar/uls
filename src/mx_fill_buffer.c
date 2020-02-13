@@ -5,7 +5,7 @@ struct stat *mx_fill_buffer(const char *filename) {
     int status;
 
     if (buffer != NULL) {
-        status = stat(filename, buffer);
+        status = lstat(filename, buffer);
         if (status != 0) {
             free(buffer);
             return NULL;

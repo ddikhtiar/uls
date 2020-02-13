@@ -44,22 +44,23 @@
  */
 
 typedef struct s_flags {
-    int f_a; //Включает в список файлы и папки, начинающиеся с '.'
-    int f_A; //Аналогичен f_a, но игнорирует "." и ".."
-    int f_l; //Подробный вывод данных
-    int f_1; //Выводит список в одну колонну
-    int f_G; //Изменяет цвета файлов в зависимости от типа
-    int f_C; //Выводит список в несколько колонн
-    int f_r; //Выводит в обратном алфавитном порядке
-    int f_t; //Сортирует по времени последней модификации файла
-             //до сортировки по алфавиту
-    int f_u; //Использует время последнего открытия файла вместо 
-             //времени изменения для сортировки вместе с f_t или f_l
-    int f_c; //Использует для сортировки время последнего изменения файла
-             //работает вместе с f_t или f_l
-    int f_S; //Сортирует файлы по размеру
-    int f_T; //Показывает полное время изменения файла от года до секунд
-    int f_R; //Рекурсивный вывод всех файлов и папок с вложенными файлами
+    int f_a;     //Включает в список файлы и папки, начинающиеся с '.'
+    int f_A;     //Аналогичен f_a, но игнорирует "." и ".."
+    int f_l;     //Подробный вывод данных - 
+    int f_1;     //Выводит список в одну колонну -
+    int f_G;     //Изменяет цвета файлов в зависимости от типа -
+    int f_C;     //Выводит список в несколько колонн
+    int f_r;     //Выводит в обратном порядке
+    int f_t;     //Сортирует по времени последней модификации файла -
+                 //до сортировки по алфавиту
+    int f_u;     //Использует время последнего открытия файла вместо 
+                 //времени изменения для сортировки вместе с f_t или f_l
+    int f_c;     //Использует для сортировки время последнего изменения файла
+                 //работает вместе с f_t или f_l
+    int f_S;     //Сортирует файлы по размеру
+    int f_T;     //Показывает полное время изменения файла от года до секунд
+    int f_R;     //Рекурсивный вывод всех файлов и папок с вложенными файлами
+    int f_f;     //Отключает любые сортировки и включает -a
     int illegal; //Присутствует не ликвидный флаг/прекращает работу программы
 } t_flags;
 
@@ -75,63 +76,69 @@ typedef struct s_d_list {
     struct s_d_list *next_list; //Ссылка на следующий лист со списком данных
 } t_d_list;
 
-int mx_number_of_dir(char **arr); //Возвращает кол-во дирректорий
-int mx_number_of_flags(char **arr); //Возвращает кол-во флагов
-char **mx_dir_arr(int argc, char **arr); //Возвращает массив названий дир-рий
-char **mx_flags_arr(int argc, char **arr); //Возвращает массив флагов
-t_flags *mx_create_flags_struct(char ***arr_str); //Создает структуру флагов
-bool mx_legal_flag(char ***arr_str); //Проверяет флаги на валидность
-void mx_print_illegal(char ***arr_str); //Выводит ошибку, если найден
-                                        //не валидный флаг
-bool mx_find_flag(char ***arr_str, char f_char); //Проверяет наличие флага
-                                                 //во входящем массиве
-int mx_check_arr_dir(int flg, char ***arr_dirname); //Проверяет входящий --->
+int mx_number_of_dir(char **arr);              //Возвращает кол-во дирректорий
+int mx_number_of_flags(char **arr);                 //Возвращает кол-во флагов
+char **mx_dir_arr(int argc, char **arr);  //Возвращает массив названий дир-рий
+char **mx_flags_arr(int argc, char **arr);          //Возвращает массив флагов
+t_flags *mx_create_flags_struct(char ***arr_str);   //Создает структуру флагов
+bool mx_legal_flag(char ***arr_str);           //Проверяет флаги на валидность
+void mx_print_illegal(char ***arr_str);          //Выводит ошибку, если найден
+                                                 //не валидный флаг
+bool mx_find_flag(char ***arr_str, char f_char);     //Проверяет наличие флага
+                                                     //во входящем массиве
+int mx_check_arr_dir(char ***arr_dirname);           //Проверяет входящий --->
 // ---> массив папок, удаляет не валидные названи и выводит ошибку "No such.."
-void mx_check_flags_conflict(t_flags **flags); //Совместимость флагов
-bool mx_legal_dirname(const char *name); //Проверяет, является ли указанная
-                                         //строка именем файла/папки/ссылкой
-void mx_print_wrong_dir(char ***arr_del); //Выводит ошибку, если указано
-                                          //неверное имя файла/папки
-void mx_sort_arrstr(int flag_r, char ***arr_str); //Сортировка по ASCII +/-
-bool mx_status(struct stat buf); //Часть mx_legal_dirname()
-t_data *mx_create_data(const char *path, const char *filename); // ---> 
+void mx_check_flags_conflict(t_flags **flags);          //Совместимость флагов
+bool mx_legal_dirname(const char *name);    //Проверяет, является ли указанная
+                                           //строка именем файла/папки/ссылкой
+void mx_print_wrong_dir(char ***arr_del);       //Выводит ошибку, если указано
+                                                //неверное имя файла/папки
+void mx_sort_arrstr(int flag_r, char ***arr_str);    //Сортировка по ASCII +/-
+bool mx_status(struct stat buf);                    //Часть mx_legal_dirname()
+t_data *mx_create_data(const char *path, const char *filename);        // --->
 // ---> Создает лист с данными о файле
-struct stat *mx_fill_buffer(const char *filename); //Заполняет буффер
-                                                   //в листе данными из stat
-void mx_push_data_back(t_data **list, t_data *last); //Добавляет лист
-                                                     //с данными файла
-                                                     //в конец списка
-t_d_list *mx_create_list(t_data *pathname, t_data *data);   // --->
+struct stat *mx_fill_buffer(const char *filename);          //Заполняет буффер
+                                                     //в листе данными из stat
+void mx_push_data_back(t_data **list, t_data *last);          //Добавляет лист
+                                                             //с данными файла
+                                                              //в конец списка
+t_d_list *mx_create_list(t_data *pathname, t_data *data);              // --->
 // ---> Создает лист со списком данных
-void mx_push_list_back(t_d_list **list, t_d_list *last);    // --->
+void mx_push_list_back(t_d_list **list, t_d_list *last);               // --->
 // ---> Добавляет список данных в конец списка списков
-void mx_push_list_front(t_d_list **list, t_d_list *first);  // --->
+void mx_push_list_front(t_d_list **list, t_d_list *first);             // --->
 // ---> Добавляет список данных в начало списка списков
-t_d_list *mx_list_assembly(t_flags **flags, char ***names); // --->
+t_d_list *mx_list_assembly(t_flags **flags, char ***names);            // --->
 // ---> Создает полный список списков с данными
-void mx_for_dir_to_list(t_flags **flags, t_d_list **list);  // --->
+void mx_for_dir_to_list(t_flags **flags, t_d_list **list);             // --->
 // ---> Добаляет файлы в списки соотв. папок (рекурсивная)
-void mx_sort_lists_list(t_flags **flags, t_d_list **list);  // --->
-// ---> Сортирует список согласно флагам
-void mx_open_dir(t_flags **flags, t_d_list **list);         // --->
+void mx_sort_lists_list(t_flags **flags, t_d_list **list);             // --->
+// ---> В зависимости от флагов, применяет одну из сортировок ниже:
+void mx_l_ascii_sort(t_d_list **list);            //Сорт. в алфавитном порядке
+void mx_l_sort_size(t_d_list **list);                       //Сорт. по размеру
+void mx_l_sort_a_time(t_d_list **list);       //Сорт. по времени посл. доступа
+void mx_l_sort_c_time(t_d_list **list);     //Сорт. по времени посл. изменения
+void mx_l_sort_m_time(t_d_list **list);   //Сорт. по времени посл. модификации
+void mx_l_reverse(t_d_list **list);               //Меняет порядок на обратный
+void mx_open_dir(t_flags **flags, t_d_list **list);                    // --->
 // ---> Добавляет файлы из папки в соотв. ей список
-void mx_plus_insight_dir(t_d_list **list);                  // --->
+void mx_plus_insight_dir(t_d_list **list);                             // --->
 // ---> Добавляет в список списков новый лист папки
-void mx_swap_data(t_data *first, t_data *second);         // --->
+void mx_swap_data(t_data *first, t_data *second);                      // --->
 // ---> Меняет местами листы в списке данных
-void mx_swap_list(t_d_list *first, t_d_list *second);     // --->
+void mx_swap_list(t_d_list *first, t_d_list *second);                  // --->
 // ---> Меняет местами листы в списке листов
-char *mx_make_pathname(const char *begin, const char *end); // --->
+char *mx_make_pathname(const char *begin, const char *end);            // --->
 // ---> Собирает путь к файлу из папки с бинарником
-void mx_sort_datas_list(t_flags **flags, t_d_list **list);  // --->
-// ---> В зависимости от флагов применяет одну из сортировок ниже:
-void mx_ascii_sort(t_data **data_list);  //Сорт. в алфавитном порядке
-void mx_sort_size(t_data **data_list);   //Сорт. по размеру
-void mx_sort_a_time(t_data **data_list); //Сорт. по времени посл. доступа
-void mx_sort_c_time(t_data **data_list); //Сорт. по времени посл. изменения
-void mx_sort_m_time(t_data **data_list); //Сорт. по времени посл. модификации
-void mx_reverse_all(t_data **data_list); //Меняет порядок на обратный
-void mx_mc_output(t_d_list *list); //вивід в колонки
+void mx_sort_datas_list(t_flags **flags, t_d_list **list);             // --->
+// ---> В зависимости от флагов, применяет одну из сортировок ниже:
+void mx_ascii_sort(t_data **data_list);           //Сорт. в алфавитном порядке
+void mx_sort_size(t_data **data_list);                      //Сорт. по размеру
+void mx_sort_a_time(t_data **data_list);      //Сорт. по времени посл. доступа
+void mx_sort_c_time(t_data **data_list);    //Сорт. по времени посл. изменения
+void mx_sort_m_time(t_data **data_list);  //Сорт. по времени посл. модификации
+void mx_reverse_all(t_data **data_list);          //Меняет порядок на обратный
+void mx_mc_output(t_d_list *list);                           //вивід в колонки
 int mx_size_data_list(t_data **data_list); //Количество листов в списке данных
 int mx_count_rows(int elem_count, int col_num); //рахує к-ть рядків для виводу
 

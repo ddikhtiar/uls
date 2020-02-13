@@ -13,7 +13,7 @@ int main (int argc, char **argv) {
     // }
     if (flags->illegal == 1)
         exit(1);
-    if (mx_check_arr_dir(flags->f_r, &dirs_names) == -1)
+    if (mx_check_arr_dir(&dirs_names) == -1)
         exit(1);
     list = mx_list_assembly(&flags, &dirs_names);
     // sx_print_list(NULL);
@@ -43,7 +43,10 @@ static void sx_print_list(t_d_list *list) {
     while (ptr) {
         current = ptr->link;
         mx_printstr("===(");
-        mx_printstr(ptr->path->name);
+        if (ptr->path == NULL)
+            mx_printstr("NULL");
+        else
+            mx_printstr(ptr->path->name);
         mx_printstr(")===\n");
         while (current) {
             mx_printstr(current->name);

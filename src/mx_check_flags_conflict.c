@@ -9,4 +9,6 @@ void mx_check_flags_conflict(t_flags **flags) {
         flg->f_c = 0;
         flg->f_u = 0;
     }
+    if (flg->f_f == 1)
+        flg->f_a = 1;
 }

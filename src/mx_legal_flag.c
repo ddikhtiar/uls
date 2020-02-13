@@ -21,7 +21,7 @@ bool mx_legal_flag(char ***arr_str) {
 static bool sx_isflag(char c) {
     if (c == 'a' || c == 'A' || c == 'l' || c == '1' || c == 'G' || c == 'C'
         || c == 'r' || c == 't' || c == 'u' || c == 'c' || c == 'S'
-        || c == 'T' || c == 'R')
+        || c == 'T' || c == 'R' || c == 'f')
         return true;
     else
         return false;

@@ -9,7 +9,7 @@ void mx_print_illegal(char ***arr_str) {
     mx_printerr("uls: illegal option -- ");
     mx_printerr(illeg_flag);
     mx_printerr("\n");
-    mx_printerr("usage: uls [-l] [file ...]\n");
+    mx_printerr("usage: uls [-ACGRSTacflrtu1] [file ...]\n");
     mx_strdel(&illeg_flag);
 }
 

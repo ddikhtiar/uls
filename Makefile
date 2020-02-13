@@ -21,6 +21,12 @@ SRC = \
     mx_find_flag.c \
     mx_flags_arr.c \
     mx_for_dir_to_list.c \
+    mx_l_ascii_sort.c \
+    mx_l_reverse.c \
+    mx_l_sort_a_time.c \
+    mx_l_sort_c_time.c \
+    mx_l_sort_m_time.c \
+    mx_l_sort_size.c \
     mx_legal_dirname.c \
     mx_legal_flag.c \
     mx_list_assembly.c \
@@ -38,6 +44,10 @@ SRC = \
     mx_size_data_list.c \
     mx_sort_a_time.c \
     mx_sort_arrstr.c \
+    mx_sort_c_time.c \
+    mx_sort_datas_list.c \
+    mx_sort_lists_list.c\
+    mx_sort_m_time.c \
     mx_sort_size.c \
     mx_status.c \
     mx_swap_data.c \
@@ -58,6 +68,12 @@ SRCF = \
     src/mx_find_flag.c \
     src/mx_flags_arr.c \
     src/mx_for_dir_to_list.c \
+    src/mx_l_ascii_sort.c \
+    src/mx_l_reverse.c \
+    src/mx_l_sort_a_time.c \
+    src/mx_l_sort_c_time.c \
+    src/mx_l_sort_m_time.c \
+    src/mx_l_sort_size.c \
     src/mx_legal_dirname.c \
     src/mx_legal_flag.c \
     src/mx_list_assembly.c \
@@ -75,6 +91,10 @@ SRCF = \
     src/mx_size_data_list.c \
     src/mx_sort_a_time.c \
     src/mx_sort_arrstr.c \
+    src/mx_sort_c_time.c \
+    src/mx_sort_datas_list.c \
+    src/mx_sort_lists_list.c \
+    src/mx_sort_m_time.c \
     src/mx_sort_size.c \
     src/mx_status.c \
     src/mx_swap_data.c \
@@ -97,6 +117,12 @@ OBJO = \
     obj/mx_find_flag.o \
     obj/mx_flags_arr.o \
     obj/mx_for_dir_to_list.o \
+    obj/mx_l_ascii_sort.o \
+    obj/mx_l_reverse.o \
+    obj/mx_l_sort_a_time.o \
+    obj/mx_l_sort_c_time.o \
+    obj/mx_l_sort_m_time.o \
+    obj/mx_l_sort_size.o \
     obj/mx_legal_dirname.o \
     obj/mx_legal_flag.o \
     obj/mx_list_assembly.o \
@@ -114,6 +140,10 @@ OBJO = \
     obj/mx_size_data_list.o \
     obj/mx_sort_a_time.o \
     obj/mx_sort_arrstr.o \
+    obj/mx_sort_c_time.o \
+    obj/mx_sort_datas_list.o \
+    obj/mx_sort_lists_list.o \
+    obj/mx_sort_m_time.o \
     obj/mx_sort_size.o \
     obj/mx_status.o \
     obj/mx_swap_data.o \
