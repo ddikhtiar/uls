@@ -1,6 +1,6 @@
 #include "uls.h"
  
-static void sx_print_list(t_d_list *list);
+// static void sx_print_list(t_d_list *list);
 
 int main (int argc, char **argv) {
     char **flags_names = mx_flags_arr(argc, argv);
@@ -17,7 +17,8 @@ int main (int argc, char **argv) {
         exit(1);
     list = mx_list_full_assembly(&flags, &dirs_names);
     // sx_print_list(NULL);
-    sx_print_list(list);
+    // sx_print_list(list);
+    mx_mc_output(list);
     // printf("--- Multicolumn output ---\n");
     // mx_mc_output(list);
     // system("leaks uls");
@@ -34,32 +35,32 @@ int main (int argc, char **argv) {
 //     system("leaks uls");
 }
 
-static void sx_print_list(t_d_list *list) {
-    t_d_list *ptr = list;
-    t_data *current = NULL;
+// static void sx_print_list(t_d_list *list) {
+//     t_d_list *ptr = list;
+//     t_data *current = NULL;
 
-    if (!ptr)
-        return;
-    while (ptr) {
-        current = ptr->link;
-        mx_printstr("===(");
-        if (ptr->path == NULL)
-            mx_printstr("NULL");
-        else
-            mx_printstr(ptr->path->name);
-        mx_printstr(")===\n");
-        while (current) {
-            mx_printstr(current->name);
-            if (current->buffer == NULL)
-                mx_printchar('#');
-            mx_printstr(" -> ");
-            if (current->next == NULL)
-                mx_printstr("(NULL)\n");
-            current = current->next;
-        }
-        mx_printstr("|\nV\n");
-        if (ptr->next_list == NULL)
-            mx_printstr("(NULL)\n");
-        ptr = ptr->next_list;
-    }
-}
+//     if (!ptr)
+//         return;
+//     while (ptr) {
+//         current = ptr->link;
+//         mx_printstr("===(");
+//         if (ptr->path == NULL)
+//             mx_printstr("NULL");
+//         else
+//             mx_printstr(ptr->path->name);
+//         mx_printstr(")===\n");
+//         while (current) {
+//             mx_printstr(current->name);
+//             if (current->buffer == NULL)
+//                 mx_printchar('#');
+//             mx_printstr(" -> ");
+//             if (current->next == NULL)
+//                 mx_printstr("(NULL)\n");
+//             current = current->next;
+//         }
+//         mx_printstr("|\nV\n");
+//         if (ptr->next_list == NULL)
+//             mx_printstr("(NULL)\n");
+//         ptr = ptr->next_list;
+//     }
+// }

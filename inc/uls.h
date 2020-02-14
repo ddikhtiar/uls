@@ -141,5 +141,7 @@ void mx_reverse_all(t_data **data_list);          //Меняет порядок 
 void mx_mc_output(t_d_list *list);                           //вивід в колонки
 int mx_size_data_list(t_data **data_list); //Количество листов в списке данных
 int mx_count_rows(int elem_count, int col_num); //рахує к-ть рядків для виводу
+void mx_print_col(t_data *current, int i, int row_num,
+                  int elem_count, int col_len); //вивід однієї дерикторії
 
 #endif
