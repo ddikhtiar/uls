@@ -14,27 +14,20 @@ int mx_count_rows(int elem_count, int col_num) {
 
 void mx_print_col(t_data *current, int i, int row_num,
 				  int elem_count, int col_len) {
-	// printf("i = %d, row_num = %d, elem_count = %d, col_len = %d\n", i, row_num, elem_count, col_len);
 	int k = 0;
 	int j = i;
-	// printf("111111\n");
 	while (k < i) {
 		k++;
 		current = current->next;
 	}
-	// printf("222222\n");
 	for(j = i; j < elem_count; j += row_num) {
-		// printf("j = %d\n", j);
 		mx_printstr(current->name);
 		sx_print_tabs(col_len, mx_strlen(current->name));
 		k = 0;
-		// printf("2.111\n");
-		// printf("BEFORE\n");
 		while (current && k < row_num) {
 			k++;
 			current = current->next;
 		}
-		// printf("Finish array\n");
 	}
 	mx_printstr("\n");
 }

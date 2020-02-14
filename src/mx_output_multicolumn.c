@@ -19,20 +19,15 @@ void mx_mc_output(t_d_list *list){
 	}
 	while(ptr){
 		current = ptr->link;
-		printf("%s:\n", ptr->path->name);
-		// elem_count = 0;
+		mx_printstr(ptr->path->name);
+		mx_printstr("\n");
 		max_str = sx_count_max_str(current, &elem_count);
 		col_len = sx_count_col_len(max_str);
 		col_num = sx_count_col_num(col_len);
 		row_num = mx_count_rows(elem_count, col_num);
-		// printf("elem_count = %d max_str = %d col_len = %d col_num = %d row_num = %d\n", elem_count, max_str, col_len, col_num, row_num);
-		// mx_printstr(ptr->path->name);
-		// mx_printstr("\n");
 		for(i = 0; i < row_num; i++) {
-			// current = ptr->link;
 			mx_print_col(current, i, row_num, elem_count, col_len);
 		}
-		// printf("------- AAAAAA -----\n");
 		ptr = ptr->next_list;
 		mx_printstr("\n");
 	}
@@ -41,22 +36,15 @@ void mx_mc_output(t_d_list *list){
 // count max length string
 static int sx_count_max_str(t_data *cur_list, int *elem_num) {
 	*elem_num = 0;
-	// t_d_list *ptr = list;
-	// t_data *current = NULL;
 	int max_str = 0;
 
-	// while(ptr){
-		// current = ptr->link;
-		while(cur_list) {
-			if(mx_strlen(cur_list->name) > max_str) {
-				max_str = mx_strlen(cur_list->name);
-			}
-			cur_list = cur_list->next;
-			*elem_num = *elem_num + 1;
+	while(cur_list) {
+		if(mx_strlen(cur_list->name) > max_str) {
+			max_str = mx_strlen(cur_list->name);
 		}
-		// ptr = ptr->next_list;
-	// }
-	// printf("%d\n", max_str);
+		cur_list = cur_list->next;
+		*elem_num = *elem_num + 1;
+	}
 	return max_str;
 }
 
