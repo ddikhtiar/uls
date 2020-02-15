@@ -16,6 +16,7 @@ void mx_print_col(t_data *current, int i, int row_num,
 				  int elem_count, int col_len) {
 	int k = 0;
 	int j = i;
+
 	while (k < i) {
 		k++;
 		current = current->next;
@@ -40,7 +41,8 @@ static void sx_print_tabs(int col_len, int current_len) {
 	if(!(current_len % 8)) {
 		--tabs_count;
 	}
-	while (tabs_count--)
+	while (tabs_count--) {
         mx_printchar('\t');
+	}
     mx_printchar('\t');
 }

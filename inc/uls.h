@@ -15,6 +15,10 @@
 #include <sys/stat.h>
 #include <sys/xattr.h>
 #include <sys/ioctl.h>
+#include <sys/types.h>
+#include <pwd.h>
+#include <uuid/uuid.h>
+#include <grp.h>
 
 #define ANSI_COLOR_RED        "\x1b[31m"
 #define ANSI_COLOR_GREEN      "\x1b[32m"
@@ -43,6 +47,13 @@
  * #define MX_ISSOCK(m) (((m) & 0170000) == 0140000)
  */
 
+typedef struct group t_group;
+typedef struct dirent t_dirent;
+typedef struct passwd t_passwd;
+typedef struct s_flags t_flags;
+typedef struct s_data t_data;
+typedef struct s_d_list t_d_list;
+
 typedef struct s_flags {
     int f_a;     //Включает в список файлы и папки, начинающиеся с '.'
     int f_A;     //Аналогичен f_a, но игнорирует "." и ".."
@@ -68,6 +79,10 @@ typedef struct s_data {
     char *name;          //Имя файла
     struct stat *buffer; //Данные stat'a
     struct s_data *next; //Ссылка на следующий лист
+    uid_t st_uid;        //User ID of owner */
+    gid_t st_gid;        //Group ID of owner */
+    dev_t st_rdev;       //Device ID (if special file) */
+    off_t st_size;       //Total size, in bytes */
 } t_data;
 
 typedef struct s_d_list {
@@ -143,5 +158,8 @@ int mx_size_data_list(t_data **data_list); //Количество листов �
 int mx_count_rows(int elem_count, int col_num); //рахує к-ть рядків для виводу
 void mx_print_col(t_data *current, int i, int row_num,
                   int elem_count, int col_len); //вивід однієї дерикторії
+void mx_tbl_output(t_d_list *list); // -l
+void mx_print_total_nblocks(t_data *list); // рахує total blocks для -l
+void mx_print_permission(t_data *cur_list); // вивід прав доступа -l
 
 #endif
