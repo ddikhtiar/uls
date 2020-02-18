@@ -13,6 +13,7 @@ SRC = \
     mx_ascii_sort.c \
     mx_check_arr_dir.c \
     mx_check_flags_conflict.c \
+    mx_check_permission.c \
     mx_create_data.c \
     mx_create_flags_struct.c \
     mx_create_list.c \
@@ -36,6 +37,7 @@ SRC = \
     mx_open_dir.c \
     mx_plus_insight_dir.c \
     mx_print_illegal.c \
+    mx_print_permission_denied.c \
     mx_print_wrong_dir.c \
     mx_push_data_back.c \
     mx_push_list_back.c \
@@ -63,6 +65,7 @@ SRCF = \
     src/mx_ascii_sort.c \
     src/mx_check_arr_dir.c \
     src/mx_check_flags_conflict.c \
+    src/mx_check_permission.c \
     src/mx_create_data.c \
     src/mx_create_flags_struct.c \
     src/mx_create_list.c \
@@ -86,6 +89,7 @@ SRCF = \
     src/mx_open_dir.c \
     src/mx_plus_insight_dir.c \
     src/mx_print_illegal.c \
+    src/mx_print_permission_denied.c \
     src/mx_print_wrong_dir.c \
     src/mx_push_data_back.c \
     src/mx_push_list_back.c \
@@ -115,6 +119,7 @@ OBJO = \
     obj/mx_ascii_sort.o \
     obj/mx_check_arr_dir.o \
     obj/mx_check_flags_conflict.o \
+    obj/mx_check_permission.o \
     obj/mx_create_data.o \
     obj/mx_create_flags_struct.o \
     obj/mx_create_list.o \
@@ -138,6 +143,7 @@ OBJO = \
     obj/mx_open_dir.o \
     obj/mx_plus_insight_dir.o \
     obj/mx_print_illegal.o \
+    obj/mx_print_permission_denied.o \
     obj/mx_print_wrong_dir.o \
     obj/mx_push_data_back.o \
     obj/mx_push_list_back.o \

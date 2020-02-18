@@ -50,14 +50,18 @@ static void sx_print_list(t_d_list *list) {
         else
             mx_printstr(ptr->path->name);
         mx_printstr(")===\n");
-        while (current) {
-            mx_printstr(current->name);
-            if (current->buffer == NULL)
-                mx_printchar('#');
-            mx_printstr(" -> ");
-            if (current->next == NULL)
-                mx_printstr("(NULL)\n");
-            current = current->next;
+        if (!mx_check_permission(ptr))
+            mx_print_permission_denied(ptr);
+        else {
+            while (current) {
+                mx_printstr(current->name);
+                if (current->buffer == NULL)
+                    mx_printchar('#');
+                mx_printstr(" -> ");
+                if (current->next == NULL)
+                    mx_printstr("(NULL)\n");
+                current = current->next;
+            }
         }
         mx_printstr("|\nV\n");
         if (ptr->next_list == NULL)
