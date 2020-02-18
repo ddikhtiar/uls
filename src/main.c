@@ -16,8 +16,8 @@ int main (int argc, char **argv) {
     if (mx_check_arr_dir(&dirs_names) == -1)
         exit(1);
     list = mx_list_full_assembly(&flags, &dirs_names);
-    // sx_print_list(NULL);
-    sx_print_list(list);
+    sx_print_list(NULL);
+    // sx_print_list(list);
     // mx_mc_output(list);
     mx_tbl_output(list);
     // printf("--- Multicolumn output ---\n");
@@ -50,8 +50,8 @@ static void sx_print_list(t_d_list *list) {
         else
             mx_printstr(ptr->path->name);
         mx_printstr(")===\n");
-        if (!mx_check_permission(ptr))
-            mx_print_permission_denied(ptr);
+        if (!mx_check_permission(ptr))            //  Добавить в вывод -l
+            mx_print_permission_denied(ptr);      //  !!!
         else {
             while (current) {
                 mx_check_unprintable(&(current->name));
