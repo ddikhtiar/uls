@@ -4,6 +4,8 @@ void mx_sort_size(t_data **data_list) {
     t_data *ptr1 = *data_list;
     t_data *ptr2 = NULL;
 
+    if (!ptr1)
+        return;
     while (ptr1->next != NULL) {
         ptr2 = ptr1->next;
         while (ptr2) {
