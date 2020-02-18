@@ -19,6 +19,7 @@
 #include <pwd.h>
 #include <uuid/uuid.h>
 #include <grp.h>
+#include <errno.h>
 #include <time.h>
 
 #define ANSI_COLOR_RED        "\x1b[31m"

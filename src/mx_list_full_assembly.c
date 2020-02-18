@@ -13,13 +13,12 @@ t_d_list *mx_list_full_assembly(t_flags **flags, char ***names) {
             if (list == NULL || list->path != NULL)
                 mx_push_list_front(&list, mx_create_list(NULL, files));
         }
-        if (MX_ISDIR(current->buffer->st_mode) || MX_ISLNK(current->buffer->st_mode)) {
+        if (MX_ISDIR(current->buffer->st_mode)
+            || MX_ISLNK(current->buffer->st_mode))
             mx_push_list_back(&list, mx_create_list(current, NULL));
-        }
         arr_ptr++;
     }
-    if (list->path == NULL)
-        mx_sort_lists_list(flags, &list);
+    mx_sort_lists_list(flags, &list);
     mx_for_dir_to_list(flags, &list);
     return list;
 }
