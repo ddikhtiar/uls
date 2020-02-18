@@ -20,6 +20,7 @@
 #include <uuid/uuid.h>
 #include <grp.h>
 #include <errno.h>
+#include <time.h>
 
 #define ANSI_COLOR_RED        "\x1b[31m"
 #define ANSI_COLOR_GREEN      "\x1b[32m"
@@ -48,6 +49,7 @@
  * #define MX_ISSOCK(m) (((m) & 0170000) == 0140000)
  */
 
+typedef struct stat t_stat;
 typedef struct group t_group;
 typedef struct dirent t_dirent;
 typedef struct passwd t_passwd;
@@ -84,6 +86,10 @@ typedef struct s_data {
     gid_t st_gid;        //Group ID of owner */
     dev_t st_rdev;       //Device ID (if special file) */
     off_t st_size;       //Total size, in bytes */
+    struct timespec st_atimespec; /* time of last access */
+    struct timespec st_mtimespec; /* time of last data modification */
+    struct timespec st_ctimespec; /* time of last status change */
+    struct timespec st_btimespec; /*  File creation time(birth)  */
 } t_data;
 
 typedef struct s_d_list {
@@ -162,5 +168,6 @@ void mx_print_col(t_data *current, int i, int row_num,
 void mx_tbl_output(t_d_list *list); // -l
 void mx_print_total_nblocks(t_data *list); // рахує total blocks для -l
 void mx_print_permission(t_data *cur_list); // вивід прав доступа -l
+void mx_print_time(time_t *t); //вивід часу
 
 #endif
