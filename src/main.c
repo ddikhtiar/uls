@@ -19,7 +19,7 @@ int main (int argc, char **argv) {
     // sx_print_list(NULL);
     sx_print_list(list);
     // mx_mc_output(list);
-    // mx_tbl_output(list);
+    mx_tbl_output(list);
     // printf("--- Multicolumn output ---\n");
     // mx_mc_output(list);
     // system("leaks uls");

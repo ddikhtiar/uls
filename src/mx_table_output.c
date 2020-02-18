@@ -6,13 +6,8 @@ void mx_tbl_output(t_d_list *list) {
 	current = ptr->link;
 	t_passwd *passwd = getpwuid(current->buffer->st_uid);
 	t_group *group = getgrgid(current->buffer->st_gid);
-	// t_group *group = current->buffer->st_gid;
-	// printf("gid %u\n", current->buffer->st_gid);
     time_t *t;
 
-    // if(group == NULL) {
-    // 	printf("group = NULL\n");
-    // }
 	mx_print_total_nblocks(current);
 	while(current) {
     	t = &(current->buffer->st_mtimespec.tv_sec);
@@ -22,8 +17,12 @@ void mx_tbl_output(t_d_list *list) {
 	    mx_printstr(" ");
     	mx_printstr(passwd->pw_name);
     	mx_printstr(" ");
-    	mx_printstr(group->gr_name);
-	    // mx_printstr(" ");
+    	if(group == NULL) {
+    		mx_printint(current->buffer->st_gid);
+    	} else {
+    		mx_printstr(group->gr_name);
+    	}
+	    mx_printstr(" ");
 		mx_printint(current->buffer->st_size);
 		mx_printstr(" ");
 		mx_print_time(t);

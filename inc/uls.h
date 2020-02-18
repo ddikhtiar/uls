@@ -82,10 +82,6 @@ typedef struct s_data {
     char *name;          //Имя файла
     struct stat *buffer; //Данные stat'a
     struct s_data *next; //Ссылка на следующий лист
-    // uid_t st_uid;        //User ID of owner */
-    // gid_t st_gid;        //Group ID of owner */
-    // dev_t st_rdev;       //Device ID (if special file) */
-    // off_t st_size;       //Total size, in bytes */
     // struct timespec st_atimespec; /* time of last access */
     // struct timespec st_mtimespec; /* time of last data modification */
     // struct timespec st_ctimespec; /* time of last status change */
