@@ -33,6 +33,18 @@ void mx_tbl_output(t_d_list *list) {
 	}
 }
 
+static char get_file_acl(t_data *current) {
+    acl_t tmp;
+
+    if (listxattr(current->full_path, NULL, 0, XATTR_NOFOLLOW) > 0)
+        return ('@');
+    if ((tmp = acl_get_file(current->full_path, ACL_TYPE_EXTENDED))) {
+        acl_free(tmp);
+        return ('+');
+    }
+    return (' ');
+}
+ 
 void mx_print_permission(t_data *cur_list) {
 	mx_printstr( (S_ISDIR(cur_list->buffer->st_mode)) ? "d" : "-");
     mx_printstr( (cur_list->buffer->st_mode & S_IRUSR) ? "r" : "-");
@@ -44,4 +56,26 @@ void mx_print_permission(t_data *cur_list) {
     mx_printstr( (cur_list->buffer->st_mode & S_IROTH) ? "r" : "-");
     mx_printstr( (cur_list->buffer->st_mode & S_IWOTH) ? "w" : "-");
     mx_printstr( (cur_list->buffer->st_mode & S_IXOTH) ? "x" : "-");
+}
+
+void mx_print_chmod(t_data *current, int space_num) {
+    char chmod[12];
+
+    chmod[0] = get_file_type(file);
+    chmod[1] = (S_IRUSR & current->buffer->st_mode) ? 'r' : '-';
+    chmod[2] = (S_IWUSR & current->buffer->st_mode) ? 'w' : '-';
+    chmod[3] = (S_IXUSR & current->buffer->st_mode) ? 'x' : '-';
+    chmod[4] = (S_IRGRP & current->buffer->st_mode) ? 'r' : '-';
+    chmod[5] = (S_IWGRP & current->buffer->st_mode) ? 'w' : '-';
+    chmod[6] = (S_IXGRP & current->buffer->st_mode) ? 'x' : '-';
+    chmod[7] = (S_IROTH & current->buffer->st_mode) ? 'r' : '-';
+    chmod[8] = (S_IWOTH & current->buffer->st_mode) ? 'w' : '-';
+    chmod[9] = (S_IXOTH & current->buffer->st_mode) ? 'x' : '-';
+    chmod[10] = get_file_acl(current);
+    chmod[11] = '\0';
+    S_ISUID & current->buffer->st_mode ? (chmod[3] = chmod[3] == '-' ? 'S' : 's') : 0;
+    S_ISGID & current->buffer->st_mode ? (chmod[6] = chmod[6] == '-' ? 'S' : 's') : 0;
+    S_ISVTX & current->buffer->st_mode ? (chmod[9] = chmod[9] == '-' ? 'T' : 't') : 0;
+    mx_printstr(chmod);
+    mx_printnchar(' ', space_num);
 }
