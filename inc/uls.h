@@ -162,12 +162,14 @@ void mx_sort_m_time(t_data **data_list);  //Сорт. по времени пос
 void mx_reverse_all(t_data **data_list);          //Меняет порядок на обратный
 void mx_mc_output(t_d_list *list);                           //вивід в колонки
 int mx_size_data_list(t_data **data_list); //Количество листов в списке данных
-int mx_count_rows(int elem_count, int col_num); //рахує к-ть рядків для виводу
+int mx_count_rows(int elem_count, int col_num); //Рахує к-ть рядків для виводу
 void mx_print_col(t_data *current, int i, int row_num,
-                  int elem_count, int col_len); //вивід однієї дерикторії
-void mx_tbl_output(t_d_list *list); // -l
-void mx_print_total_nblocks(t_data *list); // рахує total blocks для -l
-void mx_print_permission(t_data *cur_list); // вивід прав доступа -l
-void mx_print_time(time_t *t); //вивід часу
+                  int elem_count, int col_len);      //Вивід однієї дерикторії
+void mx_tbl_output(t_d_list *list);                                      // -l
+void mx_print_total_nblocks(t_data *list);         //Рахує total blocks для -l
+void mx_print_permission(t_data *cur_list);            //Вивід прав доступа -l
+void mx_print_time(time_t *t);                                    //Вивід часу
+bool mx_check_permission(t_d_list *list);                   //Проверка доступа
+void mx_print_permission_denied(t_d_list *list);//Вывод ошибки "Oтказ доступа"
 
 #endif
