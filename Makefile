@@ -55,7 +55,8 @@ SRC = \
     mx_output_multicolumn.c \
     mx_output_multicolumn_2.c \
     mx_table_output.c \
-    mx_print_total_blocks.c
+    mx_print_total_blocks.c \
+    mx_print_time.c \
 
 SRCF = \
     src/main.c \
@@ -104,7 +105,8 @@ SRCF = \
     src/mx_output_multicolumn.c \
     src/mx_output_multicolumn_2.c \
     src/mx_table_output.c \
-    src/mx_print_total_blocks.c
+    src/mx_print_total_blocks.c \
+    src/mx_print_time.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -156,6 +158,7 @@ OBJO = \
     obj/mx_output_multicolumn_2.o \
     obj/mx_table_output.o \
     obj/mx_print_total_blocks.o \
+    obj/mx_print_time.o \
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 
