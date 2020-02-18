@@ -14,6 +14,7 @@ SRC = \
     mx_check_arr_dir.c \
     mx_check_flags_conflict.c \
     mx_check_permission.c \
+    mx_check_unprintable.c \
     mx_create_data.c \
     mx_create_flags_struct.c \
     mx_create_list.c \
@@ -66,6 +67,7 @@ SRCF = \
     src/mx_check_arr_dir.c \
     src/mx_check_flags_conflict.c \
     src/mx_check_permission.c \
+    src/mx_check_unprintable.c \
     src/mx_create_data.c \
     src/mx_create_flags_struct.c \
     src/mx_create_list.c \
@@ -120,6 +122,7 @@ OBJO = \
     obj/mx_check_arr_dir.o \
     obj/mx_check_flags_conflict.o \
     obj/mx_check_permission.o \
+    obj/mx_check_unprintable.o \
     obj/mx_create_data.o \
     obj/mx_create_flags_struct.o \
     obj/mx_create_list.o \

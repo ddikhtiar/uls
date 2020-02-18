@@ -54,6 +54,7 @@ static void sx_print_list(t_d_list *list) {
             mx_print_permission_denied(ptr);
         else {
             while (current) {
+                mx_check_unprintable(&(current->name));
                 mx_printstr(current->name);
                 if (current->buffer == NULL)
                     mx_printchar('#');
