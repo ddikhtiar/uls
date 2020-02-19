@@ -20,16 +20,21 @@ void mx_mc_output(t_d_list *list){
 	while(ptr){
 		current = ptr->link;
 		mx_printstr(ptr->path->name);
-		mx_printstr("\n");
-		max_str = sx_count_max_str(current, &elem_count);
-		col_len = sx_count_col_len(max_str);
-		col_num = sx_count_col_num(col_len);
-		row_num = mx_count_rows(elem_count, col_num);
-		for(i = 0; i < row_num; i++) {
-			mx_print_col(current, i, row_num, elem_count, col_len);
+		mx_printstr(":\n");
+		if (!mx_check_permission(ptr))
+            mx_print_permission_denied(ptr);
+		else {
+			max_str = sx_count_max_str(current, &elem_count);
+			col_len = sx_count_col_len(max_str);
+			col_num = sx_count_col_num(col_len);
+			row_num = mx_count_rows(elem_count, col_num);
+			for(i = 0; i < row_num; i++) {
+				mx_print_col(current, i, row_num, elem_count, col_len);
+			}
 		}
 		ptr = ptr->next_list;
-		mx_printstr("\n");
+		if (ptr != NULL)
+			mx_printstr("\n");
 	}
 }
 

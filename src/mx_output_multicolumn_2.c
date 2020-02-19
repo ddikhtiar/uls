@@ -22,6 +22,7 @@ void mx_print_col(t_data *current, int i, int row_num,
 		current = current->next;
 	}
 	for(j = i; j < elem_count; j += row_num) {
+		mx_check_unprintable(&(current->name));
 		mx_printstr(current->name);
 		sx_print_tabs(col_len, mx_strlen(current->name));
 		k = 0;
