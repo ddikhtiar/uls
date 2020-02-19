@@ -17,6 +17,8 @@ void mx_tbl_output(t_d_list *list) {
 	    mx_printstr(" ");
     	mx_printstr(passwd->pw_name);
     	mx_printstr(" ");
+    	printf("gid %u", current->buffer->st_gid);
+    	mx_printstr(" ");
     	mx_printstr(group->gr_name);
 	    mx_printstr(" ");
 		mx_printint(current->buffer->st_size);
