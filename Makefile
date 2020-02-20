@@ -66,6 +66,7 @@ SRC = \
     mx_printnchar.c \
     mx_print_major.c \
     mx_print_minor.c \
+    mx_print_nlinks.c \
 
 SRCF = \
     src/main.c \
@@ -125,6 +126,7 @@ SRCF = \
     src/mx_printnchar.c \
     src/mx_print_major.c \
     src/mx_print_minor.c \
+    src/mx_print_nlinks.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -186,6 +188,7 @@ OBJO = \
     obj/mx_printnchar.o \
     obj/mx_print_major.o \
     obj/mx_print_minor.o \
+    obj/mx_print_nlinks.o \
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 
