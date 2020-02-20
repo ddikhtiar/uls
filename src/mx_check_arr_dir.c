@@ -1,5 +1,6 @@
 #include "uls.h"
 
+static char **sx_current_dir();
 static void sx_delete_illegal_dirname(char ***arr_ptr, char **str_ptr);
 static int sx_num_of_wrong(char ***arr_str);
 static void sx_parse(int num, char ***d_true, char ***d_false);
@@ -8,8 +9,10 @@ int mx_check_arr_dir(char ***arr_dirname) {
     char **illegal = NULL;
     int wrong = 0;
 
-    if (*arr_dirname == NULL)
+    if (*arr_dirname == NULL) {
+        *arr_dirname = sx_current_dir();
         return 0;
+    }
     if ((wrong = sx_num_of_wrong(arr_dirname)) > 0) {
         illegal = (char **) malloc(sizeof(char *) * (wrong + 1));
         illegal[wrong] = NULL;
@@ -20,6 +23,15 @@ int mx_check_arr_dir(char ***arr_dirname) {
         return -1;
     else
         return 1;
+}
+
+static char **sx_current_dir() {
+    char **arr = NULL;
+
+    arr = (char **) malloc(sizeof(char *) * 2);
+    arr[0] = mx_strdup(".");
+    arr[1] = NULL;
+    return arr;
 }
 
 static void sx_parse(int num, char ***d_true, char ***d_false) {
