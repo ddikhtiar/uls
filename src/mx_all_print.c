@@ -9,7 +9,7 @@ void mx_all_print(t_flags **flgs, t_d_list **list, int terminal, int quant) {
     }
     if ((*flgs)->f_l == 1)
     printf("-l print all\n");
-        // mx_mc_output(*list, (*flgs)->f_G);
+        // mx_tbl_output(*list, (*flgs)->f_G, (*f)->f_T, quant);
     else if ((*flgs)->f_C == 1)
     printf("Multycolumn print all\n");
         // mx_mc_output(*list, (*flgs)->f_G);

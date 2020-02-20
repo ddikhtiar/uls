@@ -18,5 +18,5 @@ int main (int argc, char **argv) {
     // mx_mc_output(list);
     // mx_tbl_output(list);
     // system("leaks uls");
-    // exit(0);
+    exit(0);
 }

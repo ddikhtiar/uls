@@ -31,8 +31,7 @@ static void sx_print_files(t_data **list, int flg_G) {
     if (ptr) {
         while (ptr) {
             if (flg_G == 1)
-                // mx_print_color(ptr->name);
-                printf("Colored name");
+                mx_print_color(ptr);
             else
                 mx_printstr(ptr->name);
             mx_printchar('\n');

@@ -26,11 +26,9 @@
 
 #define ANSI_COLOR_RED        "\x1b[31m"
 #define ANSI_COLOR_GREEN      "\x1b[32m"
-#define ANSI_COLOR_BOLD_GREEN "\x1b[32;1m"
 #define ANSI_COLOR_YELLOW     "\x1b[33m"
 #define ANSI_COLOR_BLUE       "\x1b[34m"
 #define ANSI_COLOR_MAGENTA    "\x1b[35m"
-#define ANSI_COLOR_BOLD_CYAN  "\x1b[96;1m"
 #define ANSI_COLOR_RESET      "\x1b[0m"
 
 #define MX_ISREG(m) (((m) & S_IFMT) == S_IFREG)
@@ -40,6 +38,9 @@
 #define MX_ISBLK(m) (((m) & S_IFMT) == S_IFBLK)
 #define MX_ISFIFO(m) (((m) & S_IFMT) == S_IFIFO)
 #define MX_ISSOCK(m) (((m) & S_IFMT) == S_IFSOCK)
+#define MX_ISWHT(m) (((m) & S_IFMT) == S_IFWHT)
+#define MX_ISEXEC(m) ((m) & S_IXUSR)
+#define MX_ISBIN(m) ((m) & S_IXOTH)
 
 #define MX_MAJOR(x) ((int32_t)(((u_int32_t)(x) >> 24) & 0xff))
 #define MX_MINOR(x) ((int32_t)((x)&0xffffff))
@@ -183,5 +184,6 @@ void mx_one_column_output(t_d_list *list, int flg_G, int input);       // --->
 int mx_list_of_lists_size(t_d_list **list);           //Кол-во листов в списке
 void mx_all_print(t_flags **flgs, t_d_list **list, int terminal, int quant);
 //Вывод всех данных согласно флагов
+void mx_print_color(t_data *node);                             //Вывод в цвете
 
 #endif

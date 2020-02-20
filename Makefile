@@ -40,6 +40,7 @@ SRC = \
     mx_one_column_output.c \
     mx_open_dir.c \
     mx_plus_insight_dir.c \
+    mx_print_color.c \
     mx_print_illegal.c \
     mx_print_permission_denied.c \
     mx_print_wrong_dir.c \
@@ -97,6 +98,7 @@ SRCF = \
     src/mx_one_column_output.c \
     src/mx_open_dir.c \
     src/mx_plus_insight_dir.c \
+    src/mx_print_color.c \
     src/mx_print_illegal.c \
     src/mx_print_permission_denied.c \
     src/mx_print_wrong_dir.c \
@@ -156,6 +158,7 @@ OBJO = \
     obj/mx_one_column_output.o \
     obj/mx_open_dir.o \
     obj/mx_plus_insight_dir.o \
+    obj/mx_print_color.o \
     obj/mx_print_illegal.o \
     obj/mx_print_permission_denied.o \
     obj/mx_print_wrong_dir.o \
