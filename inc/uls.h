@@ -101,6 +101,7 @@ typedef struct s_d_list {
 } t_d_list;
 
 void mx_printnchar(char c, int n); // вивід n символів
+int mx_intlength(int n);
 int mx_number_of_dir(char **arr);              //Возвращает кол-во дирректорий
 int mx_number_of_flags(char **arr);                 //Возвращает кол-во флагов
 char **mx_dir_arr(int argc, char **arr);  //Возвращает массив названий дир-рий
@@ -175,13 +176,15 @@ void mx_print_time(time_t *t);                                    //Вивід �
 bool mx_check_permission(t_d_list *list);                   //Проверка доступа
 void mx_print_permission_denied(t_d_list *list);//Вывод ошибки "Oтказ доступа"
 void mx_check_unprintable(char **name);//Заменяет непечатные символы на ?
-// print permission
 void mx_print_chmod(t_data *current, int space_num, char *path); 
+// print permission
 void mx_check_unprintable(char **name);   //Заменяет непечатные символы на '?'
 void mx_one_column_output(t_d_list *list, int flg_G, int input);       // --->
 // ---> Вывод в одну колонку
 int mx_list_of_lists_size(t_d_list **list);           //Кол-во листов в списке
 void mx_all_print(t_flags **flgs, t_d_list **list, int terminal, int quant);
 //Вывод всех данных согласно флагов
+void mx_print_minor(t_data *current, int nspaces);  // print major
+void mx_print_major(t_data *current, int nspaces);  // print minor
 
 #endif

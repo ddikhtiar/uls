@@ -10,6 +10,8 @@ void mx_tbl_output(t_d_list *list) {
 
     while(ptr){
         current = ptr->link;
+        mx_printstr(ptr->path->name);
+        mx_printstr(":\n");
 	    mx_print_total_nblocks(current);
         while(current) {
             t = &(current->buffer->st_mtimespec.tv_sec);
@@ -24,7 +26,12 @@ void mx_tbl_output(t_d_list *list) {
                 mx_printstr(group->gr_name);
             }
             mx_printstr(" ");
-            mx_printint(current->buffer->st_size);
+            if (MX_ISCHR(current->buffer->st_mode) || MX_ISBLK(current->buffer->st_mode)) {
+                mx_print_major(current, 3);
+                mx_print_minor(current, 3);
+            } else {
+                mx_printint(current->buffer->st_size);
+            }
             mx_printstr(" ");
             mx_print_time(t);
             // mx_printstr(" ");
@@ -41,7 +48,6 @@ static char get_file_acl(char *path) {
 
     if (listxattr(path, NULL, 0, XATTR_NOFOLLOW) > 0)
         return ('@');
-    // printf("path: %s\n", path);
     if ((tmp = acl_get_file(path, ACL_TYPE_EXTENDED))) {
         acl_free(tmp);
         return ('+');

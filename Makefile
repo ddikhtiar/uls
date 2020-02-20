@@ -64,6 +64,8 @@ SRC = \
     mx_print_total_blocks.c \
     mx_print_time.c \
     mx_printnchar.c \
+    mx_print_major.c \
+    mx_print_minor.c \
 
 SRCF = \
     src/main.c \
@@ -121,6 +123,8 @@ SRCF = \
     src/mx_print_total_blocks.c \
     src/mx_print_time.c \
     src/mx_printnchar.c \
+    src/mx_print_major.c \
+    src/mx_print_minor.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -180,6 +184,8 @@ OBJO = \
     obj/mx_print_total_blocks.o \
     obj/mx_print_time.o \
     obj/mx_printnchar.o \
+    obj/mx_print_major.o \
+    obj/mx_print_minor.o \
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 
