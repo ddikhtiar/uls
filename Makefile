@@ -32,9 +32,11 @@ SRC = \
     mx_legal_dirname.c \
     mx_legal_flag.c \
     mx_list_full_assembly.c \
+    mx_list_of_lists_size.c \
     mx_make_pathname.c \
     mx_number_of_dir.c \
     mx_number_of_flags.c \
+    mx_one_column_output.c \
     mx_open_dir.c \
     mx_plus_insight_dir.c \
     mx_print_illegal.c \
@@ -86,9 +88,11 @@ SRCF = \
     src/mx_legal_dirname.c \
     src/mx_legal_flag.c \
     src/mx_list_full_assembly.c \
+    src/mx_list_of_lists_size.c \
     src/mx_make_pathname.c \
     src/mx_number_of_dir.c \
     src/mx_number_of_flags.c \
+    src/mx_one_column_output.c \
     src/mx_open_dir.c \
     src/mx_plus_insight_dir.c \
     src/mx_print_illegal.c \
@@ -142,9 +146,11 @@ OBJO = \
     obj/mx_legal_dirname.o \
     obj/mx_legal_flag.o \
     obj/mx_list_full_assembly.o \
+    obj/mx_list_of_lists_size.o \
     obj/mx_make_pathname.o \
     obj/mx_number_of_dir.o \
     obj/mx_number_of_flags.o \
+    obj/mx_one_column_output.o \
     obj/mx_open_dir.o \
     obj/mx_plus_insight_dir.o \
     obj/mx_print_illegal.o \

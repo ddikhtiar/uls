@@ -174,8 +174,14 @@ void mx_print_permission(t_data *cur_list);            //Вивід прав д�
 void mx_print_time(time_t *t);                                    //Вивід часу
 bool mx_check_permission(t_d_list *list);                   //Проверка доступа
 void mx_print_permission_denied(t_d_list *list);//Вывод ошибки "Oтказ доступа"
+<<<<<<< HEAD
 void mx_check_unprintable(char **name);//Заменяет непечатные символы на ?
 // print permission
 void mx_print_chmod(t_data *current, int space_num, char *path); 
+=======
+void mx_check_unprintable(char **name);   //Заменяет непечатные символы на '?'
+void mx_one_column_output(t_d_list **list);             //Вывод в одну колонку
+int mx_list_of_lists_size(t_d_list **list);           //Кол-во листов в списке
+>>>>>>> 2d7068206552af4c162966d8eb83b26935264126
 
 #endif
