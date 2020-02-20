@@ -167,7 +167,7 @@ void mx_mc_output(t_d_list *list);                           //вивід в к�
 int mx_size_data_list(t_data **data_list); //Количество листов в списке данных
 int mx_count_rows(int elem_count, int col_num); //Рахує к-ть рядків для виводу
 void mx_print_col(t_data *current, int i, int row_num,
-                  int elem_count, int col_len);      //Вивід однієї дерикторії
+                  int elem_count, int col_len);      //Вивід однієї директорії
 void mx_tbl_output(t_d_list *list);                                      // -l
 void mx_print_total_nblocks(t_data *list);         //Рахує total blocks для -l
 void mx_print_permission(t_data *cur_list);            //Вивід прав доступа -l
