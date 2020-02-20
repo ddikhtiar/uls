@@ -16,6 +16,7 @@ void mx_tbl_output(t_d_list *list) {
         while(current) {
             t = &(current->buffer->st_mtimespec.tv_sec);
             mx_print_chmod(current, 1, current->d_path);
+            // mx_print_nlinks(file, size[0]);
             mx_printint(current->buffer->st_nlink);
             mx_printstr(" ");
             mx_printstr(passwd->pw_name);
