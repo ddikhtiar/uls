@@ -6,3 +6,13 @@ void mx_printnchar(char c, int n) {
         n--;
     }
 }
+
+int mx_intlength(int n) {
+    int result = 1;
+
+    while (n / 10) {
+        ++result;
+        n /= 10;
+    }
+    return result;
+}
