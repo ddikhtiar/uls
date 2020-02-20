@@ -3,20 +3,14 @@
 static int sx_count_max_str(t_data *cur_list, int *elem_num);
 static int sx_count_col_len(int max_str);
 static int sx_count_col_num(int col_len);
+static void sx_print_col_2(t_data *current, int elem_count);
 
 void mx_mc_output(t_d_list *list){
 	t_d_list *ptr = list;
 	t_data *current = NULL;
-	int col_len = 0;
-	int max_str = 0;
-	int col_num = 0;
 	int elem_count = 0;
-	int	row_num = 0;
-	int i = 0;
+	// int counter = 0;
 
-	if (!ptr){
-        return;
-	}
 	while(ptr){
 		current = ptr->link;
 		mx_printstr(ptr->path->name);
@@ -24,17 +18,27 @@ void mx_mc_output(t_d_list *list){
 		if (!mx_check_permission(ptr))
             mx_print_permission_denied(ptr);
 		else {
-			max_str = sx_count_max_str(current, &elem_count);
-			col_len = sx_count_col_len(max_str);
-			col_num = sx_count_col_num(col_len);
-			row_num = mx_count_rows(elem_count, col_num);
-			for(i = 0; i < row_num; i++) {
-				mx_print_col(current, i, row_num, elem_count, col_len);
-			}
+			sx_print_col_2(current, elem_count);
 		}
 		ptr = ptr->next_list;
 		if (ptr != NULL)
 			mx_printstr("\n");
+	}
+}
+
+static void sx_print_col_2(t_data *current, int elem_count) {
+	int col_len = 0;
+	int max_str = 0;
+	int col_num = 0;
+	int	row_num = 0;
+	int i = 0;
+
+	max_str = sx_count_max_str(current, &elem_count);
+	col_len = sx_count_col_len(max_str);
+	col_num = sx_count_col_num(col_len);
+	row_num = mx_count_rows(elem_count, col_num);
+	for(i = 0; i < row_num; i++) {
+		mx_print_col(current, i, row_num, elem_count, col_len);
 	}
 }
 

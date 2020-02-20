@@ -1,6 +1,8 @@
 #include "uls.h"
 
-t_data *mx_create_data(const char *path, const char *filename) {
+// static char *make_full_path(char *file_name, char *dirname);
+
+t_data *mx_create_data(char *path, char *filename) {
     t_data *data = NULL;
     // t_stat stat;
 
@@ -10,10 +12,7 @@ t_data *mx_create_data(const char *path, const char *filename) {
         data->name = mx_strdup(filename);
         data->buffer = mx_fill_buffer(path);
         data->next = NULL;
-        // data->st_atimespec = data->buffer->st_atimespec;
-        // data->st_mtimespec = data->buffer->st_mtimespec;
-        // data->st_ctimespec = data->buffer->st_ctimespec;
-        // data->st_btimespec = stat.st_btimespec;
+        data->d_path = mx_strdup(path);
     }
     return data;
 }
