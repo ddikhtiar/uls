@@ -13,6 +13,7 @@ void mx_plus_insight_dir(t_d_list **list) {
             continue;
         if (MX_ISDIR(file->buffer->st_mode)) {
             path = mx_make_pathname(ptr->path->name, file->name);
+            printf("path: %s\n", path);
             second = som->next_list;
             som->next_list = mx_create_list(mx_create_data(path, path), NULL);
             som->next_list->next_list = second;

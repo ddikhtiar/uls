@@ -21,6 +21,8 @@
 #include <grp.h>
 #include <errno.h>
 #include <time.h>
+#include <sys/types.h>
+#include <sys/acl.h>
 
 #define ANSI_COLOR_RED        "\x1b[31m"
 #define ANSI_COLOR_GREEN      "\x1b[32m"
@@ -38,6 +40,9 @@
 #define MX_ISBLK(m) (((m) & S_IFMT) == S_IFBLK)
 #define MX_ISFIFO(m) (((m) & S_IFMT) == S_IFIFO)
 #define MX_ISSOCK(m) (((m) & S_IFMT) == S_IFSOCK)
+
+#define MX_MAJOR(x) ((int32_t)(((u_int32_t)(x) >> 24) & 0xff))
+#define MX_MINOR(x) ((int32_t)((x)&0xffffff))
 
 /*
  * #define MX_ISREG(m) (((m) & 0170000) == 0100000)
@@ -80,6 +85,7 @@ typedef struct s_flags {
 
 typedef struct s_data {
     char *name;          //Имя файла
+    char *d_path;
     struct stat *buffer; //Данные stat'a
     struct s_data *next; //Ссылка на следующий лист
     // struct timespec st_atimespec; /* time of last access */
@@ -94,6 +100,7 @@ typedef struct s_d_list {
     struct s_d_list *next_list; //Ссылка на следующий лист со списком данных
 } t_d_list;
 
+void mx_printnchar(char c, int n); // вивід n символів
 int mx_number_of_dir(char **arr);              //Возвращает кол-во дирректорий
 int mx_number_of_flags(char **arr);                 //Возвращает кол-во флагов
 char **mx_dir_arr(int argc, char **arr);  //Возвращает массив названий дир-рий
@@ -113,7 +120,7 @@ void mx_print_wrong_dir(char ***arr_del);       //Выводит ошибку, �
                                                 //неверное имя файла/папки
 void mx_sort_arrstr(int flag_r, char ***arr_str);    //Сортировка по ASCII +/-
 bool mx_status(struct stat buf);                    //Часть mx_legal_dirname()
-t_data *mx_create_data(const char *path, const char *filename);        // --->
+t_data *mx_create_data(char *path, char *filename);        // --->
 // ---> Создает лист с данными о файле
 struct stat *mx_fill_buffer(const char *filename);          //Заполняет буффер
                                                      //в листе данными из stat
@@ -167,6 +174,9 @@ void mx_print_permission(t_data *cur_list);            //Вивід прав д�
 void mx_print_time(time_t *t);                                    //Вивід часу
 bool mx_check_permission(t_d_list *list);                   //Проверка доступа
 void mx_print_permission_denied(t_d_list *list);//Вывод ошибки "Oтказ доступа"
+void mx_check_unprintable(char **name);//Заменяет непечатные символы на ?
+// print permission
+void mx_print_chmod(t_data *current, int space_num, char *path); 
 void mx_check_unprintable(char **name);   //Заменяет непечатные символы на '?'
 void mx_one_column_output(t_d_list *list, int flg_G, int input);       // --->
 // ---> Вывод в одну колонку
