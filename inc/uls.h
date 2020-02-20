@@ -186,8 +186,8 @@ int mx_list_of_lists_size(t_d_list **list);           //Кол-во листов
 void mx_all_print(t_flags **flgs, t_d_list **list, int terminal, int quant);
 //Вывод всех данных согласно флагов
 void mx_print_color(t_data *node);                             //Вывод в цвете
-void mx_print_minor(t_data *current, int nspaces);  // print major
-void mx_print_major(t_data *current, int nspaces);  // print minor
+void mx_print_minor(t_data *current, int nspaces);              // print major
+void mx_print_major(t_data *current, int nspaces);              // print minor
 void mx_print_nlinks(t_data *current, int nspaces);
 
 #endif

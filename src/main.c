@@ -14,9 +14,9 @@ int main (int argc, char **argv) {
     x = mx_number_of_dir(dirs_names);
     list = mx_list_full_assembly(&flags, &dirs_names);
     // mx_all_print(&flags, &list, isatty(1), x);
-    // mx_one_column_output(list, flags->f_G, x);
+    mx_one_column_output(list, flags->f_G, x);
     // mx_mc_output(list);
-    mx_tbl_output(list);
+    // mx_tbl_output(list);
     // system("leaks uls");
     exit(0);
 }
