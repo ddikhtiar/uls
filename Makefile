@@ -10,6 +10,7 @@ INCF = inc/uls.h
 
 SRC = \
     main.c \
+    mx_all_print.c \
     mx_ascii_sort.c \
     mx_check_arr_dir.c \
     mx_check_flags_conflict.c \
@@ -65,6 +66,7 @@ SRC = \
 
 SRCF = \
     src/main.c \
+    src/mx_all_print.c \
     src/mx_ascii_sort.c \
     src/mx_check_arr_dir.c \
     src/mx_check_flags_conflict.c \
@@ -122,6 +124,7 @@ OBJ = $(SRC:.c=.o)
 
 OBJO = \
     obj/main.o \
+    obj/mx_all_print.o \
     obj/mx_ascii_sort.o \
     obj/mx_check_arr_dir.o \
     obj/mx_check_flags_conflict.o \

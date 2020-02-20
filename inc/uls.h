@@ -126,7 +126,7 @@ void mx_push_list_back(t_d_list **list, t_d_list *last);               // --->
 // ---> Добавляет список данных в конец списка списков
 void mx_push_list_front(t_d_list **list, t_d_list *first);             // --->
 // ---> Добавляет список данных в начало списка списков
-t_d_list *mx_list_full_assembly(t_flags **flags, char ***names);            // --->
+t_d_list *mx_list_full_assembly(t_flags **flags, char ***names);       // --->
 // ---> Создает полный список списков с данными
 void mx_for_dir_to_list(t_flags **flags, t_d_list **list);             // --->
 // ---> Добаляет файлы в списки соотв. папок (рекурсивная)
@@ -168,7 +168,10 @@ void mx_print_time(time_t *t);                                    //Вивід �
 bool mx_check_permission(t_d_list *list);                   //Проверка доступа
 void mx_print_permission_denied(t_d_list *list);//Вывод ошибки "Oтказ доступа"
 void mx_check_unprintable(char **name);   //Заменяет непечатные символы на '?'
-void mx_one_column_output(t_d_list **list);             //Вывод в одну колонку
+void mx_one_column_output(t_d_list *list, int flg_G, int input);       // --->
+// ---> Вывод в одну колонку
 int mx_list_of_lists_size(t_d_list **list);           //Кол-во листов в списке
+void mx_all_print(t_flags **flgs, t_d_list **list, int terminal, int quant);
+//Вывод всех данных согласно флагов
 
 #endif

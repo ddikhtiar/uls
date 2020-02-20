@@ -43,15 +43,13 @@ static void sx_modify(t_flags **flags, char ***arr_str) {
         mx_print_illegal(arr_str);
     }
     else {
-        if (mx_find_flag(arr_str, 'a'))
-            (*flags)->f_a = 1;
-        if (mx_find_flag(arr_str, 'A'))
-            (*flags)->f_A = 1;
-        if (mx_find_flag(arr_str, 'l'))
-            (*flags)->f_l = 1;
-        if (mx_find_flag(arr_str, '1')) {
-            (*flags)->f_1 = 1;
-            (*flags)->f_C = 0;
+        if (mx_find_flag(arr_str, 'u')) {
+            (*flags)->f_u = 1;
+            (*flags)->f_c = 0;
+        }
+        if (mx_find_flag(arr_str, 'c')) {
+            (*flags)->f_c = 1;
+            (*flags)->f_u = 0;
         }
         sx_modify_end(flags, arr_str);
         mx_check_flags_conflict(flags);
@@ -59,12 +57,12 @@ static void sx_modify(t_flags **flags, char ***arr_str) {
 }
 
 static void sx_modify_end(t_flags **flags, char ***arr_str) {
+    if (mx_find_flag(arr_str, 'a'))
+        (*flags)->f_a = 1;
+    if (mx_find_flag(arr_str, 'A'))
+        (*flags)->f_A = 1;
     if (mx_find_flag(arr_str, 'G'))
         (*flags)->f_G = 1;
-    if (mx_find_flag(arr_str, 'C')) {
-        (*flags)->f_C = 1;
-        (*flags)->f_1 = 0;
-    }
     if (mx_find_flag(arr_str, 'r'))
         (*flags)->f_r = 1;
     if (mx_find_flag(arr_str, 't'))
@@ -81,12 +79,19 @@ static void sx_modify_end(t_flags **flags, char ***arr_str) {
 }
 
 static void sx_modify_end_end(t_flags **flags, char ***arr_str) {
-    if (mx_find_flag(arr_str, 'u')) {
-        (*flags)->f_u = 1;
-        (*flags)->f_c = 0;
+    if (mx_find_flag(arr_str, 'l')) {
+        (*flags)->f_l = 1;
+        (*flags)->f_1 = 0;
+        (*flags)->f_C = 0;
     }
-    if (mx_find_flag(arr_str, 'c')) {
-        (*flags)->f_c = 1;
-        (*flags)->f_u = 0;
+    if (mx_find_flag(arr_str, '1')) {
+        (*flags)->f_1 = 1;
+        (*flags)->f_C = 0;
+        (*flags)->f_l = 0;
+    }
+    if (mx_find_flag(arr_str, 'C')) {
+        (*flags)->f_C = 1;
+        (*flags)->f_1 = 0;
+        (*flags)->f_l = 0;
     }
 }
