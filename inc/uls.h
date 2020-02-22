@@ -24,12 +24,16 @@
 #include <sys/types.h>
 #include <sys/acl.h>
 
-#define ANSI_COLOR_RED        "\x1b[31m"
-#define ANSI_COLOR_GREEN      "\x1b[32m"
-#define ANSI_COLOR_YELLOW     "\x1b[33m"
-#define ANSI_COLOR_BLUE       "\x1b[34m"
-#define ANSI_COLOR_MAGENTA    "\x1b[35m"
-#define ANSI_COLOR_RESET      "\x1b[0m"
+#define ANSI_COLOR_RED         "\x1b[31m"
+#define ANSI_COLOR_GREEN       "\x1b[32m"
+#define ANSI_COLOR_YELLOW      "\x1b[33m"
+#define ANSI_COLOR_BLUE        "\x1b[34m"
+#define ANSI_COLOR_MAGENTA     "\x1b[35m"
+#define ANSI_COLOR_ULTRA_BLUE  "\x1b[36m"
+#define ANSI_COLOR_BLCK_ON_GRN "\x1b[30;42m"
+#define ANSI_COLOR_BLUE_ON_YLW "\x1b[34;43m"
+#define ANSI_COLOR_BLUE_ON_BLU "\x1b[34;46m"
+#define ANSI_COLOR_RESET       "\x1b[0m"
 
 #define MX_ISREG(m) (((m) & S_IFMT) == S_IFREG)
 #define MX_ISDIR(m) (((m) & S_IFMT) == S_IFDIR)
@@ -41,6 +45,7 @@
 #define MX_ISWHT(m) (((m) & S_IFMT) == S_IFWHT)
 #define MX_ISEXEC(m) ((m) & S_IXUSR)
 #define MX_ISBIN(m) ((m) & S_IXOTH)
+#define MX_ISWRT(m) (((m) & S_IWOTH) && ((m) & S_ISVTX))
 
 #define MX_MAJOR(x) ((int32_t)(((u_int32_t)(x) >> 24) & 0xff))
 #define MX_MINOR(x) ((int32_t)((x)&0xffffff))
@@ -165,18 +170,20 @@ void mx_sort_a_time(t_data **data_list);      //Сорт. по времени п
 void mx_sort_c_time(t_data **data_list);    //Сорт. по времени посл. изменения
 void mx_sort_m_time(t_data **data_list);  //Сорт. по времени посл. модификации
 void mx_reverse_all(t_data **data_list);          //Меняет порядок на обратный
-void mx_mc_output(t_d_list *list);                           //вивід в колонки
+void mx_mc_output(t_d_list *list, int flg_G, int input);               // --->
+// ---> Вывод в несколько колонок
 int mx_size_data_list(t_data **data_list); //Количество листов в списке данных
 int mx_count_rows(int elem_count, int col_num); //Рахує к-ть рядків для виводу
 void mx_print_col(t_data *current, int i, int row_num,
-                  int elem_count, int col_len);      //Вивід однієї директорії
+                  int elem_count, int col_len, int flg_G);             // --->
+// ---> Вивід однієї директорії
 void mx_tbl_output(t_d_list *list);                                      // -l
 void mx_print_total_nblocks(t_data *list);         //Рахує total blocks для -l
 void mx_print_permission(t_data *cur_list);            //Вивід прав доступа -l
 void mx_print_time(time_t *t);                                    //Вивід часу
 bool mx_check_permission(t_d_list *list);                   //Проверка доступа
 void mx_print_permission_denied(t_d_list *list);//Вывод ошибки "Oтказ доступа"
-void mx_check_unprintable(char **name);//Заменяет непечатные символы на ?
+void mx_check_unprintable(char **name);     //Заменяет непечатные символы на ?
 void mx_print_chmod(t_data *current, int space_num, char *path); 
 // print permission
 void mx_check_unprintable(char **name);   //Заменяет непечатные символы на '?'

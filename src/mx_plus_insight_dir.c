@@ -27,5 +27,7 @@ static bool sx_stop_segfault(const char *str) {
         return false;
     if (mx_strcmp(str, "..") == 0)
         return false;
+    if (mx_strcmp(str, "Permission") == 0)
+        return false;
     return true;
 }

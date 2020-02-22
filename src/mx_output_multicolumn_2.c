@@ -13,7 +13,7 @@ int mx_count_rows(int elem_count, int col_num) {
 }
 
 void mx_print_col(t_data *current, int i, int row_num,
-				  int elem_count, int col_len) {
+				  int elem_count, int col_len, int flg_G) {
 	int k = 0;
 	int j = i;
 
@@ -23,7 +23,10 @@ void mx_print_col(t_data *current, int i, int row_num,
 	}
 	for(j = i; j < elem_count; j += row_num) {
 		mx_check_unprintable(&(current->name));
-		mx_printstr(current->name);
+        if (flg_G == 1)
+            mx_print_color(current);
+        else
+            mx_printstr(current->name);
 		sx_print_tabs(col_len, mx_strlen(current->name));
 		k = 0;
 		while (current && k < row_num) {
