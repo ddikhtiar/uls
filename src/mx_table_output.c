@@ -4,38 +4,28 @@ void mx_tbl_output(t_d_list *list) {
 	t_d_list *ptr = list;
 	t_data *current = NULL;
 	current = ptr->link;
-	t_passwd *passwd = getpwuid(current->buffer->st_uid);
-	t_group *group = getgrgid(current->buffer->st_gid);
     time_t *t;
+    int *size;
 
     while(ptr){
         current = ptr->link;
         mx_printstr(ptr->path->name);
         mx_printstr(":\n");
+        size = mx_get_row_size(current);
 	    mx_print_total_nblocks(current);
         while(current) {
             t = &(current->buffer->st_mtimespec.tv_sec);
             mx_print_chmod(current, 1, current->d_path);
-            // mx_print_nlinks(file, size[0]);
-            mx_printint(current->buffer->st_nlink);
-            mx_printstr(" ");
-            mx_printstr(passwd->pw_name);
-            mx_printstr(" ");
-            if(group == NULL) {
-                mx_printint(current->buffer->st_gid);
-            } else {
-                mx_printstr(group->gr_name);
-            }
-            mx_printstr(" ");
+            mx_print_nlinks(current, size[0]);
+            mx_print_uid(current, size[1]);
+            mx_print_gid(current, size[2]);
             if (MX_ISCHR(current->buffer->st_mode) || MX_ISBLK(current->buffer->st_mode)) {
                 mx_print_major(current, 3);
                 mx_print_minor(current, 3);
             } else {
-                mx_printint(current->buffer->st_size);
+                mx_print_size(current, size[3]);
             }
-            mx_printstr(" ");
             mx_print_time(t);
-            // mx_printstr(" ");
             mx_printstr(current->name);
             mx_printstr("\n");
             current = current->next;

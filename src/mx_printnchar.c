@@ -16,3 +16,13 @@ int mx_intlength(int n) {
     }
     return result;
 }
+
+int mx_long_length(long long int n) {
+    int result = 1;
+
+    while (n / 10) {
+        ++result;
+        n /= 10;
+    }
+    return result;
+}

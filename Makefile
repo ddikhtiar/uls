@@ -68,6 +68,9 @@ SRC = \
     mx_print_major.c \
     mx_print_minor.c \
     mx_print_nlinks.c \
+    mx_get_row_size.c \
+    mx_print_size.c \
+    mx_print_ids.c \
 
 SRCF = \
     src/main.c \
@@ -129,6 +132,9 @@ SRCF = \
     src/mx_print_major.c \
     src/mx_print_minor.c \
     src/mx_print_nlinks.c \
+    src/mx_get_row_size.c \
+    src/mx_print_size.c \
+    src/mx_print_ids.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -192,6 +198,9 @@ OBJO = \
     obj/mx_print_major.o \
     obj/mx_print_minor.o \
     obj/mx_print_nlinks.o \
+    obj/mx_get_row_size.o \
+    obj/mx_print_size.o \
+    obj/mx_print_ids.o \
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 

@@ -50,6 +50,8 @@
 #define MX_MAJOR(x) ((int32_t)(((u_int32_t)(x) >> 24) & 0xff))
 #define MX_MINOR(x) ((int32_t)((x)&0xffffff))
 
+#define MX_MAX(a, b) b &((a - b) >> 31) | a &(~(a - b) >> 31)
+
 /*
  * #define MX_ISREG(m) (((m) & 0170000) == 0100000)
  * #define MX_ISDIR(m) (((m) & 0170000) == 0040000)
@@ -108,6 +110,8 @@ typedef struct s_d_list {
 
 void mx_printnchar(char c, int n); // вивід n символів
 int mx_intlength(int n);
+int mx_long_length(long long int n);
+char *mx_lltoa(long long int number);
 int mx_number_of_dir(char **arr);              //Возвращает кол-во дирректорий
 int mx_number_of_flags(char **arr);                 //Возвращает кол-во флагов
 char **mx_dir_arr(int argc, char **arr);  //Возвращает массив названий дир-рий
@@ -196,5 +200,9 @@ void mx_print_color(t_data *node);                             //Вывод в �
 void mx_print_minor(t_data *current, int nspaces);              // print major
 void mx_print_major(t_data *current, int nspaces);              // print minor
 void mx_print_nlinks(t_data *current, int nspaces);
+int *mx_get_row_size(t_data *current);                    //рахує ширину рядка
+void mx_print_size(t_data *current, int nspaces);
+void mx_print_uid(t_data *current, int nspaces);
+void mx_print_gid(t_data *current, int nspaces);
 
 #endif
