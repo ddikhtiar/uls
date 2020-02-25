@@ -1,88 +1,80 @@
 #include "uls.h"
 
-void mx_tbl_output(t_d_list *list) {
+static void mx_out(t_data *current, int flg_T, int flg_G, int *size);
+static void print_full_date(char *str_date);
+static void mx_time_out(t_data *current, int flg_T);
+
+void mx_tbl_output(t_d_list *list, int flg_G, int flg_T) {
 	t_d_list *ptr = list;
 	t_data *current = NULL;
-	current = ptr->link;
-    time_t *t;
     int *size;
-
+    int count = 0;
+    int list_sz = mx_list_of_lists_size(&ptr);
+	
+    current = ptr->link;
     while(ptr){
         current = ptr->link;
-        mx_printstr(ptr->path->name);
-        mx_printstr(":\n");
+        if(list_sz > 1) {
+            mx_printstr(ptr->path->name);
+            mx_printstr(":\n");
+        }
         size = mx_get_row_size(current);
 	    mx_print_total_nblocks(current);
-        while(current) {
-            t = &(current->buffer->st_mtimespec.tv_sec);
-            mx_print_chmod(current, 1, current->d_path);
-            mx_print_nlinks(current, size[0]);
-            mx_print_uid(current, size[1]);
-            mx_print_gid(current, size[2]);
-            if (MX_ISCHR(current->buffer->st_mode) || MX_ISBLK(current->buffer->st_mode)) {
-                mx_print_major(current, 3);
-                mx_print_minor(current, 3);
-            } else {
-                mx_print_size(current, size[3]);
-            }
-            mx_print_time(t);
-            mx_printstr(current->name);
-            mx_printstr("\n");
-            current = current->next;
-        }
+        mx_out(current, flg_T, flg_G, size);
+        (list_sz > 1 && count < list_sz - 1) ? mx_printstr("\n") : mx_printstr("");
+        count++;
         ptr = ptr->next_list;
     }
 }
 
-static char get_file_acl(char *path) {
-    acl_t tmp;
-
-    if (listxattr(path, NULL, 0, XATTR_NOFOLLOW) > 0)
-        return ('@');
-    if ((tmp = acl_get_file(path, ACL_TYPE_EXTENDED))) {
-        acl_free(tmp);
-        return ('+');
+static void mx_out(t_data *current, int flg_T, int flg_G, int *size) {
+    while(current) {
+        // mx_out(current, flg_T, flg_G, size);
+        mx_print_chmod(current, 1, current->d_path);
+        mx_print_nlinks(current, size[0]);
+        mx_print_uid(current, size[1]);
+        mx_print_gid(current, size[2]);
+        mx_out_mjmn(current, size);
+        mx_time_out(current, flg_T);
+        if (flg_G == 1)
+            mx_print_color(current);
+        else
+            mx_printstr(current->name);
+        mx_printstr("\n");
+        current = current->next;
     }
-    return (' ');
 }
 
-static char get_file_type(t_data *current) {
-    if (MX_ISREG(current->buffer->st_mode))
-        return ('-');
-    else if (MX_ISDIR(current->buffer->st_mode))
-        return ('d');
-    else if (MX_ISLNK(current->buffer->st_mode))
-        return ('l');
-    else if (MX_ISBLK(current->buffer->st_mode))
-        return ('b');
-    else if (MX_ISCHR(current->buffer->st_mode))
-        return ('c');
-    else if (MX_ISSOCK(current->buffer->st_mode))
-        return ('s');
-    else if (MX_ISFIFO(current->buffer->st_mode))
-        return ('p');
-    else
-        return ('-');
+// major and minor or not
+void mx_out_mjmn(t_data *current, int *size) {
+    if (MX_ISCHR(current->buffer->st_mode) ||
+        MX_ISBLK(current->buffer->st_mode)) {
+        mx_print_major(current, 3);
+        mx_print_minor(current, 3);
+    } else {
+        mx_print_size(current, size[3]);
+    }
 }
 
-void mx_print_chmod(t_data *current, int space_num, char *path) {
-    char chmod[12];
+// print time in sec and miliseconds
+static void mx_time_out(t_data *current, int flg_T) {
+    time_t *t;
+    char *f_time;
 
-    chmod[0] = get_file_type(current);
-    chmod[1] = (S_IRUSR & current->buffer->st_mode) ? 'r' : '-';
-    chmod[2] = (S_IWUSR & current->buffer->st_mode) ? 'w' : '-';
-    chmod[3] = (S_IXUSR & current->buffer->st_mode) ? 'x' : '-';
-    chmod[4] = (S_IRGRP & current->buffer->st_mode) ? 'r' : '-';
-    chmod[5] = (S_IWGRP & current->buffer->st_mode) ? 'w' : '-';
-    chmod[6] = (S_IXGRP & current->buffer->st_mode) ? 'x' : '-';
-    chmod[7] = (S_IROTH & current->buffer->st_mode) ? 'r' : '-';
-    chmod[8] = (S_IWOTH & current->buffer->st_mode) ? 'w' : '-';
-    chmod[9] = (S_IXOTH & current->buffer->st_mode) ? 'x' : '-';
-    chmod[10] = get_file_acl(path);
-    chmod[11] = '\0';
-    S_ISUID & current->buffer->st_mode ? (chmod[3] = chmod[3] == '-' ? 'S' : 's') : 0;
-    S_ISGID & current->buffer->st_mode ? (chmod[6] = chmod[6] == '-' ? 'S' : 's') : 0;
-    S_ISVTX & current->buffer->st_mode ? (chmod[9] = chmod[9] == '-' ? 'T' : 't') : 0;
-    mx_printstr(chmod);
-    mx_printnchar(' ', space_num);
+    if(flg_T) {
+        f_time = ctime(&(current->buffer->st_mtimespec.tv_sec));
+        print_full_date(f_time);
+    } else {
+        t = &(current->buffer->st_mtimespec.tv_sec);
+        mx_print_time(t);
+    }
+}
+
+static void print_full_date(char *str_date) {
+    char *date = NULL;
+    str_date += 4;
+    date = mx_strndup(str_date, mx_strlen(str_date) - 1);
+    mx_printstr(date);
+    mx_printstr(" ");
+    mx_strdel(&date);
 }

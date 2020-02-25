@@ -181,7 +181,7 @@ int mx_count_rows(int elem_count, int col_num); //Рахує к-ть рядкі�
 void mx_print_col(t_data *current, int i, int row_num,
                   int elem_count, int col_len, int flg_G);             // --->
 // ---> Вивід однієї директорії
-void mx_tbl_output(t_d_list *list);                                      // -l
+void mx_tbl_output(t_d_list *list, int flg_G, int flg_T);                                      // -l
 void mx_print_total_nblocks(t_data *list);         //Рахує total blocks для -l
 void mx_print_permission(t_data *cur_list);            //Вивід прав доступа -l
 void mx_print_time(time_t *t);                                    //Вивід часу
@@ -204,5 +204,6 @@ int *mx_get_row_size(t_data *current);                    //рахує шири�
 void mx_print_size(t_data *current, int nspaces);
 void mx_print_uid(t_data *current, int nspaces);
 void mx_print_gid(t_data *current, int nspaces);
+void mx_out_mjmn(t_data *current, int *size); //вивід major та minor
 
 #endif
