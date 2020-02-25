@@ -29,7 +29,6 @@ void mx_tbl_output(t_d_list *list, int flg_G, int flg_T) {
 
 static void mx_out(t_data *current, int flg_T, int flg_G, int *size) {
     while(current) {
-        // mx_out(current, flg_T, flg_G, size);
         mx_print_chmod(current, 1, current->d_path);
         mx_print_nlinks(current, size[0]);
         mx_print_uid(current, size[1]);
@@ -70,6 +69,7 @@ static void mx_time_out(t_data *current, int flg_T) {
     }
 }
 
+// print date in miliseconds
 static void print_full_date(char *str_date) {
     char *date = NULL;
     str_date += 4;
