@@ -35,6 +35,7 @@ SRC = \
     mx_list_full_assembly.c \
     mx_list_of_lists_size.c \
     mx_make_pathname.c \
+    mx_multicolumn_output.c \
     mx_number_of_dir.c \
     mx_number_of_flags.c \
     mx_one_column_output.c \
@@ -99,6 +100,7 @@ SRCF = \
     src/mx_list_full_assembly.c \
     src/mx_list_of_lists_size.c \
     src/mx_make_pathname.c \
+    src/mx_multicolumn_output.c \
     src/mx_number_of_dir.c \
     src/mx_number_of_flags.c \
     src/mx_one_column_output.c \
@@ -165,6 +167,7 @@ OBJO = \
     obj/mx_list_full_assembly.o \
     obj/mx_list_of_lists_size.o \
     obj/mx_make_pathname.o \
+    obj/mx_multicolumn_output.o \
     obj/mx_number_of_dir.o \
     obj/mx_number_of_flags.o \
     obj/mx_one_column_output.o \
