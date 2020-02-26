@@ -174,14 +174,8 @@ void mx_sort_a_time(t_data **data_list);      //Сорт. по времени п
 void mx_sort_c_time(t_data **data_list);    //Сорт. по времени посл. изменения
 void mx_sort_m_time(t_data **data_list);  //Сорт. по времени посл. модификации
 void mx_reverse_all(t_data **data_list);          //Меняет порядок на обратный
-void mx_mc_output(t_d_list *list, int flg_G, int input);               // --->
-// ---> Вывод в несколько колонок
 int mx_size_data_list(t_data **data_list); //Количество листов в списке данных
-int mx_count_rows(int elem_count, int col_num); //Рахує к-ть рядків для виводу
-void mx_print_col(t_data *current, int i, int row_num,
-                  int elem_count, int col_len, int flg_G);             // --->
-// ---> Вивід однієї директорії
-void mx_tbl_output(t_d_list *list, int flg_G, int flg_T);                                      // -l
+void mx_tbl_output(t_d_list *list, int flg_G, int flg_T);                // -l
 void mx_print_total_nblocks(t_data *list);         //Рахує total blocks для -l
 void mx_print_permission(t_data *cur_list);            //Вивід прав доступа -l
 void mx_print_time(time_t *t);                                    //Вивід часу
@@ -204,6 +198,9 @@ int *mx_get_row_size(t_data *current);                    //рахує шири�
 void mx_print_size(t_data *current, int nspaces);
 void mx_print_uid(t_data *current, int nspaces);
 void mx_print_gid(t_data *current, int nspaces);
-void mx_out_mjmn(t_data *current, int *size); //вивід major та minor
+void mx_out_mjmn(t_data *current, int *size);           //вивід major та minor
+void mx_multicolumn_output(t_d_list *list, int flg_G, int input);
+int mx_columns(int max_name, int list_size, int *ptr);
+int mx_max_name(t_data *list, int flg_G);
 
 #endif

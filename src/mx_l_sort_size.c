@@ -13,6 +13,9 @@ void mx_l_sort_size(t_d_list **list) {
         while (ptr2) {
             if (ptr1->path->buffer->st_size < ptr2->path->buffer->st_size)
                 mx_swap_list(ptr1, ptr2);
+            if (ptr1->path->buffer->st_size == ptr2->path->buffer->st_size
+                && mx_strcmp(ptr1->path->name, ptr2->path->name) > 0)
+                mx_swap_list(ptr1, ptr2);
             ptr2 = ptr2->next_list;
         }
     ptr1 = ptr1->next_list;

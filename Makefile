@@ -16,6 +16,7 @@ SRC = \
     mx_check_flags_conflict.c \
     mx_check_permission.c \
     mx_check_unprintable.c \
+    mx_columns.c \
     mx_create_data.c \
     mx_create_flags_struct.c \
     mx_create_list.c \
@@ -35,6 +36,7 @@ SRC = \
     mx_list_full_assembly.c \
     mx_list_of_lists_size.c \
     mx_make_pathname.c \
+    mx_max_name.c \
     mx_multicolumn_output.c \
     mx_number_of_dir.c \
     mx_number_of_flags.c \
@@ -60,8 +62,6 @@ SRC = \
     mx_status.c \
     mx_swap_data.c \
     mx_swap_list.c \
-    mx_output_multicolumn.c \
-    mx_output_multicolumn_2.c \
     mx_table_output.c \
     mx_print_total_blocks.c \
     mx_print_time.c \
@@ -82,6 +82,7 @@ SRCF = \
     src/mx_check_flags_conflict.c \
     src/mx_check_permission.c \
     src/mx_check_unprintable.c \
+    src/mx_columns.c \
     src/mx_create_data.c \
     src/mx_create_flags_struct.c \
     src/mx_create_list.c \
@@ -101,6 +102,7 @@ SRCF = \
     src/mx_list_full_assembly.c \
     src/mx_list_of_lists_size.c \
     src/mx_make_pathname.c \
+    src/mx_max_name.c \
     src/mx_multicolumn_output.c \
     src/mx_number_of_dir.c \
     src/mx_number_of_flags.c \
@@ -126,8 +128,6 @@ SRCF = \
     src/mx_status.c \
     src/mx_swap_data.c \
     src/mx_swap_list.c \
-    src/mx_output_multicolumn.c \
-    src/mx_output_multicolumn_2.c \
     src/mx_table_output.c \
     src/mx_print_total_blocks.c \
     src/mx_print_time.c \
@@ -150,6 +150,7 @@ OBJO = \
     obj/mx_check_flags_conflict.o \
     obj/mx_check_permission.o \
     obj/mx_check_unprintable.o \
+    obj/mx_columns.o \
     obj/mx_create_data.o \
     obj/mx_create_flags_struct.o \
     obj/mx_create_list.o \
@@ -169,6 +170,7 @@ OBJO = \
     obj/mx_list_full_assembly.o \
     obj/mx_list_of_lists_size.o \
     obj/mx_make_pathname.o \
+    obj/mx_max_name.o \
     obj/mx_multicolumn_output.o \
     obj/mx_number_of_dir.o \
     obj/mx_number_of_flags.o \
@@ -194,8 +196,6 @@ OBJO = \
     obj/mx_status.o \
     obj/mx_swap_data.o \
     obj/mx_swap_list.o \
-    obj/mx_output_multicolumn.o \
-    obj/mx_output_multicolumn_2.o \
     obj/mx_table_output.o \
     obj/mx_print_total_blocks.o \
     obj/mx_print_time.o \
