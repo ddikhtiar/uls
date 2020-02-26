@@ -72,6 +72,7 @@ SRC = \
     mx_get_row_size.c \
     mx_print_size.c \
     mx_print_ids.c \
+    mx_print_chmod.c \
 
 SRCF = \
     src/main.c \
@@ -137,6 +138,7 @@ SRCF = \
     src/mx_get_row_size.c \
     src/mx_print_size.c \
     src/mx_print_ids.c \
+    src/mx_print_chmod.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -204,6 +206,7 @@ OBJO = \
     obj/mx_get_row_size.o \
     obj/mx_print_size.o \
     obj/mx_print_ids.o \
+    obj/mx_print_chmod.o \
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 
