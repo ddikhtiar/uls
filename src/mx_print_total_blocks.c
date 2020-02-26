@@ -10,8 +10,12 @@ void mx_print_total_nblocks(t_data *list) {
         ptr = ptr->next;
     }
     mx_printstr("total ");
-    total_str = mx_itoa(total);
-    mx_printstr(total_str);
+    if(!total) {
+        mx_printint(total);
+    } else {
+        total_str = mx_itoa(total);
+        mx_printstr(total_str);
+    }
     mx_printchar('\n');
     mx_strdel(&total_str);
 }

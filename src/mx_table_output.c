@@ -6,12 +6,11 @@ static void mx_time_out(t_data *current, int flg_T);
 
 void mx_tbl_output(t_d_list *list, int flg_G, int flg_T) {
 	t_d_list *ptr = list;
-	t_data *current = NULL;
+	t_data *current = ptr->link;
     int *size;
     int count = 0;
     int list_sz = mx_list_of_lists_size(&ptr);
 	
-    current = ptr->link;
     while(ptr){
         current = ptr->link;
         if(list_sz > 1) {
@@ -21,9 +20,10 @@ void mx_tbl_output(t_d_list *list, int flg_G, int flg_T) {
         size = mx_get_row_size(current);
 	    mx_print_total_nblocks(current);
         mx_out(current, flg_T, flg_G, size);
-        (list_sz > 1 && count < list_sz - 1) ? mx_printstr("\n") : mx_printstr("");
-        count++;
+        (list_sz > 1 && count < list_sz - 1) ? mx_printstr("\n") : (void) (0);
+        count++;    // ^ перенос рядка для > 1 папки
         ptr = ptr->next_list;
+        free(size);
     }
 }
 
