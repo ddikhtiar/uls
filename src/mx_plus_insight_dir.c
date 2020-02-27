@@ -1,6 +1,14 @@
 #include "uls.h"
 
-static bool sx_stop_segfault(const char *str);
+static bool sx_stop_segfault(const char *str) {
+    if (mx_strcmp(str, ".") == 0)
+        return false;
+    if (mx_strcmp(str, "..") == 0)
+        return false;
+    if (mx_strcmp(str, "Permission") == 0)
+        return false;
+    return true;
+}
 
 void mx_plus_insight_dir(t_d_list **list) {
     t_d_list *ptr = *list;
@@ -20,14 +28,4 @@ void mx_plus_insight_dir(t_d_list **list) {
             mx_strdel(&path);
         }
     }
-}
-
-static bool sx_stop_segfault(const char *str) {
-    if (mx_strcmp(str, ".") == 0)
-        return false;
-    if (mx_strcmp(str, "..") == 0)
-        return false;
-    if (mx_strcmp(str, "Permission") == 0)
-        return false;
-    return true;
 }

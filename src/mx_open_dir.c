@@ -1,6 +1,14 @@
 #include "uls.h"
 
-static bool sx_check_invis(int f_a, int f_A, const char *name);
+static bool sx_check_invis(int f_a, int f_A, const char *name) {
+    if (f_a == 0 && f_A == 0 && name[0] == '.')
+        return true;
+    if (f_a == 0 && f_A == 1 && mx_strcmp(name, ".") == 0)
+        return true;
+    if (f_a == 0 && f_A == 1 && mx_strcmp(name, "..") == 0)
+        return true;
+    return false;
+}
 
 void mx_open_dir(t_flags **flags, t_d_list **list) {
     t_d_list *ptr = *list;
@@ -22,14 +30,4 @@ void mx_open_dir(t_flags **flags, t_d_list **list) {
     }
     if (dirname && closedir(dirname) < 0)
         exit(1);
-}
-
-static bool sx_check_invis(int f_a, int f_A, const char *name) {
-    if (f_a == 0 && f_A == 0 && name[0] == '.')
-        return true;
-    if (f_a == 0 && f_A == 1 && mx_strcmp(name, ".") == 0)
-        return true;
-    if (f_a == 0 && f_A == 1 && mx_strcmp(name, "..") == 0)
-        return true;
-    return false;
 }

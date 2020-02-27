@@ -73,12 +73,12 @@ typedef struct s_d_list t_d_list;
 typedef struct s_flags {
     int f_a;     //Включает в список файлы и папки, начинающиеся с '.'
     int f_A;     //Аналогичен f_a, но игнорирует "." и ".."
-    int f_l;     //Подробный вывод данных - 
-    int f_1;     //Выводит список в одну колонну -
-    int f_G;     //Изменяет цвета файлов в зависимости от типа -
+    int f_l;     //Подробный вывод данных
+    int f_1;     //Выводит список в одну колонну
+    int f_G;     //Изменяет цвета файлов в зависимости от типа
     int f_C;     //Выводит список в несколько колонн
     int f_r;     //Выводит в обратном порядке
-    int f_t;     //Сортирует по времени последней модификации файла -
+    int f_t;     //Сортирует по времени последней модификации файла
                  //до сортировки по алфавиту
     int f_u;     //Использует время последнего открытия файла вместо 
                  //времени изменения для сортировки вместе с f_t или f_l
@@ -87,7 +87,7 @@ typedef struct s_flags {
     int f_S;     //Сортирует файлы по размеру
     int f_T;     //Показывает полное время изменения файла от года до секунд
     int f_R;     //Рекурсивный вывод всех файлов и папок с вложенными файлами
-    int f_f;     //Отключает любые сортировки и включает -a
+    int f_f;     //Отключает любые сортировки и включает "-a"
     int illegal; //Присутствует не ликвидный флаг/прекращает работу программы
 } t_flags;
 
@@ -96,10 +96,6 @@ typedef struct s_data {
     char *d_path;
     struct stat *buffer; //Данные stat'a
     struct s_data *next; //Ссылка на следующий лист
-    // struct timespec st_atimespec; /* time of last access */
-    // struct timespec st_mtimespec; /* time of last data modification */
-    // struct timespec st_ctimespec; /* time of last status change */
-    // struct timespec st_btimespec; /*  File creation time(birth)  */
 } t_data;
 
 typedef struct s_d_list {
@@ -108,7 +104,7 @@ typedef struct s_d_list {
     struct s_d_list *next_list; //Ссылка на следующий лист со списком данных
 } t_d_list;
 
-void mx_printnchar(char c, int n); // вивід n символів
+void mx_printnchar(char c, int n);                         // вивід n символів
 int mx_intlength(int n);
 int mx_long_length(long long int n);
 char *mx_lltoa(long long int number);
@@ -131,13 +127,12 @@ void mx_print_wrong_dir(char ***arr_del);       //Выводит ошибку, �
                                                 //неверное имя файла/папки
 void mx_sort_arrstr(int flag_r, char ***arr_str);    //Сортировка по ASCII +/-
 bool mx_status(struct stat buf);                    //Часть mx_legal_dirname()
-t_data *mx_create_data(char *path, char *filename);        // --->
+t_data *mx_create_data(char *path, char *filename);                    // --->
 // ---> Создает лист с данными о файле
 struct stat *mx_fill_buffer(const char *filename);          //Заполняет буффер
                                                      //в листе данными из stat
-void mx_push_data_back(t_data **list, t_data *last);          //Добавляет лист
-                                                             //с данными файла
-                                                              //в конец списка
+void mx_push_data_back(t_data **list, t_data *last);                   // --->
+// ---> Добавляет лист с данными файла в конец списка
 t_d_list *mx_create_list(t_data *pathname, t_data *data);              // --->
 // ---> Создает лист со списком данных
 void mx_push_list_back(t_d_list **list, t_d_list *last);               // --->
@@ -200,7 +195,9 @@ void mx_print_uid(t_data *current, int nspaces);
 void mx_print_gid(t_data *current, int nspaces);
 void mx_out_mjmn(t_data *current, int *size);           //вивід major та minor
 void mx_multicolumn_output(t_d_list *list, int flg_G, int input);
-int mx_columns(int max_name, int list_size, int *ptr);
+int mx_columns(int max_name, int list_size);
 int mx_max_name(t_data *list, int flg_G);
+void mx_print_name(t_data *data, int flg_G);
+void mx_print_spaces(const char *str, int max);
 
 #endif

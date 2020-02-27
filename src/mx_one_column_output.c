@@ -1,6 +1,19 @@
 #include "uls.h"
 
-static void sx_print_files(t_data **list, int flg_G);
+static void sx_print_files(t_data **list, int flg_G) {
+    t_data *ptr = *list;
+
+    if (ptr) {
+        while (ptr) {
+            if (flg_G == 1)
+                mx_print_color(ptr);
+            else
+                mx_printstr(ptr->name);
+            mx_printchar('\n');
+            ptr = ptr->next;
+        }
+    }
+}
 
 void mx_one_column_output(t_d_list *list, int flg_G, int input) {
     t_d_list *ptr = list;
@@ -22,20 +35,5 @@ void mx_one_column_output(t_d_list *list, int flg_G, int input) {
         ptr = ptr->next_list;
         if (ptr)
             mx_printchar('\n');
-    }
-}
-
-static void sx_print_files(t_data **list, int flg_G) {
-    t_data *ptr = *list;
-
-    if (ptr) {
-        while (ptr) {
-            if (flg_G == 1)
-                mx_print_color(ptr);
-            else
-                mx_printstr(ptr->name);
-            mx_printchar('\n');
-            ptr = ptr->next;
-        }
     }
 }

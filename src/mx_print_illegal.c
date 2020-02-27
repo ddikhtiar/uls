@@ -1,18 +1,5 @@
 #include "uls.h"
 
-static char sx_illegal_char(char ***arr_str);
-
-void mx_print_illegal(char ***arr_str) {
-    char *illeg_flag = mx_strnew(1);
-
-    illeg_flag[0] = sx_illegal_char(arr_str);
-    mx_printerr("uls: illegal option -- ");
-    mx_printerr(illeg_flag);
-    mx_printerr("\n");
-    mx_printerr("usage: uls [-ACGRSTacflrtu1] [file ...]\n");
-    mx_strdel(&illeg_flag);
-}
-
 static char sx_illegal_char(char ***arr_str) {
     char **arr_ptr = *arr_str;
     char *str_ptr = NULL;
@@ -32,4 +19,15 @@ static char sx_illegal_char(char ***arr_str) {
         arr_ptr++;
     }
     return '\n';
+}
+
+void mx_print_illegal(char ***arr_str) {
+    char *illeg_flag = mx_strnew(1);
+
+    illeg_flag[0] = sx_illegal_char(arr_str);
+    mx_printerr("uls: illegal option -- ");
+    mx_printerr(illeg_flag);
+    mx_printerr("\n");
+    mx_printerr("usage: uls [-ACGRSTacflrtu1] [file ...]\n");
+    mx_strdel(&illeg_flag);
 }
