@@ -52,16 +52,6 @@
 
 #define MX_MAX(a, b) b &((a - b) >> 31) | a &(~(a - b) >> 31)
 
-/*
- * #define MX_ISREG(m) (((m) & 0170000) == 0100000)
- * #define MX_ISDIR(m) (((m) & 0170000) == 0040000)
- * #define MX_ISLNK(m) (((m) & 0170000) == 0120000)
- * #define MX_ISCHR(m) (((m) & 0170000) == 0020000)
- * #define MX_ISBLK(m) (((m) & 0170000) == 0060000)
- * #define MX_ISFIFO(m) (((m) & 0170000) == 0010000)
- * #define MX_ISSOCK(m) (((m) & 0170000) == 0140000)
- */
-
 typedef struct stat t_stat;
 typedef struct group t_group;
 typedef struct dirent t_dirent;
@@ -70,130 +60,107 @@ typedef struct s_flags t_flags;
 typedef struct s_data t_data;
 typedef struct s_d_list t_d_list;
 
-typedef struct s_flags {
-    int f_a;     //Включает в список файлы и папки, начинающиеся с '.'
-    int f_A;     //Аналогичен f_a, но игнорирует "." и ".."
-    int f_l;     //Подробный вывод данных
-    int f_1;     //Выводит список в одну колонну
-    int f_G;     //Изменяет цвета файлов в зависимости от типа
-    int f_C;     //Выводит список в несколько колонн
-    int f_r;     //Выводит в обратном порядке
-    int f_t;     //Сортирует по времени последней модификации файла
-                 //до сортировки по алфавиту
-    int f_u;     //Использует время последнего открытия файла вместо 
-                 //времени изменения для сортировки вместе с f_t или f_l
-    int f_c;     //Использует для сортировки время последнего изменения файла
-                 //работает вместе с f_t или f_l
-    int f_S;     //Сортирует файлы по размеру
-    int f_T;     //Показывает полное время изменения файла от года до секунд
-    int f_R;     //Рекурсивный вывод всех файлов и папок с вложенными файлами
-    int f_f;     //Отключает любые сортировки и включает "-a"
-    int illegal; //Присутствует не ликвидный флаг/прекращает работу программы
-} t_flags;
+typedef struct s_flags
+{
+    int f_a;
+    int f_A;
+    int f_l;
+    int f_1;
+    int f_G;
+    int f_C;
+    int f_r;
+    int f_t;
+    int f_u;
+    int f_c;
+    int f_S;
+    int f_T;
+    int f_R;
+    int f_f;
+    int illegal;
+}              t_flags;
 
-typedef struct s_data {
-    char *name;          //Имя файла
+typedef struct s_data
+{
+    char *name;
     char *d_path;
-    struct stat *buffer; //Данные stat'a
-    struct s_data *next; //Ссылка на следующий лист
-} t_data;
+    struct stat *buffer;
+    struct s_data *next;
+}              t_data;
 
-typedef struct s_d_list {
-    struct s_data *path;        //Имя папки с данными о ней (1 лист)
-    struct s_data *link;        //Список с данными файлов
-    struct s_d_list *next_list; //Ссылка на следующий лист со списком данных
-} t_d_list;
+typedef struct s_d_list
+{
+    struct s_data *path;
+    struct s_data *link;
+    struct s_d_list *next_list;
+}              t_d_list;
 
-void mx_printnchar(char c, int n);                         // вивід n символів
+void mx_printnchar(char c, int n);
 int mx_intlength(int n);
 int mx_long_length(long long int n);
 char *mx_lltoa(long long int number);
-int mx_number_of_dir(char **arr);              //Возвращает кол-во дирректорий
-int mx_number_of_flags(char **arr);                 //Возвращает кол-во флагов
-char **mx_dir_arr(int argc, char **arr);  //Возвращает массив названий дир-рий
-char **mx_flags_arr(int argc, char **arr);          //Возвращает массив флагов
-t_flags *mx_create_flags_struct(char ***arr_str);   //Создает структуру флагов
-bool mx_legal_flag(char ***arr_str);           //Проверяет флаги на валидность
-void mx_print_illegal(char ***arr_str);          //Выводит ошибку, если найден
-                                                 //не валидный флаг
-bool mx_find_flag(char ***arr_str, char f_char);     //Проверяет наличие флага
-                                                     //во входящем массиве
-int mx_check_arr_dir(char ***arr_dirname);           //Проверяет входящий --->
-// ---> массив папок, удаляет не валидные названи и выводит ошибку "No such.."
-void mx_check_flags_conflict(t_flags **flags);          //Совместимость флагов
-bool mx_legal_dirname(const char *name);    //Проверяет, является ли указанная
-                                           //строка именем файла/папки/ссылкой
-void mx_print_wrong_dir(char ***arr_del);       //Выводит ошибку, если указано
-                                                //неверное имя файла/папки
-void mx_sort_arrstr(int flag_r, char ***arr_str);    //Сортировка по ASCII +/-
-bool mx_status(struct stat buf);                    //Часть mx_legal_dirname()
-t_data *mx_create_data(char *path, char *filename);                    // --->
-// ---> Создает лист с данными о файле
-struct stat *mx_fill_buffer(const char *filename);          //Заполняет буффер
-                                                     //в листе данными из stat
-void mx_push_data_back(t_data **list, t_data *last);                   // --->
-// ---> Добавляет лист с данными файла в конец списка
-t_d_list *mx_create_list(t_data *pathname, t_data *data);              // --->
-// ---> Создает лист со списком данных
-void mx_push_list_back(t_d_list **list, t_d_list *last);               // --->
-// ---> Добавляет список данных в конец списка списков
-void mx_push_list_front(t_d_list **list, t_d_list *first);             // --->
-// ---> Добавляет список данных в начало списка списков
-t_d_list *mx_list_full_assembly(t_flags **flags, char ***names);       // --->
-// ---> Создает полный список списков с данными
-void mx_for_dir_to_list(t_flags **flags, t_d_list **list);             // --->
-// ---> Добаляет файлы в списки соотв. папок (рекурсивная)
-void mx_sort_lists_list(t_flags **flags, t_d_list **list);             // --->
-// ---> В зависимости от флагов, применяет одну из сортировок ниже:
-void mx_l_ascii_sort(t_d_list **list);            //Сорт. в алфавитном порядке
-void mx_l_sort_size(t_d_list **list);                       //Сорт. по размеру
-void mx_l_sort_a_time(t_d_list **list);       //Сорт. по времени посл. доступа
-void mx_l_sort_c_time(t_d_list **list);     //Сорт. по времени посл. изменения
-void mx_l_sort_m_time(t_d_list **list);   //Сорт. по времени посл. модификации
-void mx_l_reverse(t_d_list **list);               //Меняет порядок на обратный
-void mx_open_dir(t_flags **flags, t_d_list **list);                    // --->
-// ---> Добавляет файлы из папки в соотв. ей список
-void mx_plus_insight_dir(t_d_list **list);                             // --->
-// ---> Добавляет в список списков новый лист папки
-void mx_swap_data(t_data *first, t_data *second);                      // --->
-// ---> Меняет местами листы в списке данных
-void mx_swap_list(t_d_list *first, t_d_list *second);                  // --->
-// ---> Меняет местами листы в списке листов
-char *mx_make_pathname(const char *begin, const char *end);            // --->
-// ---> Собирает путь к файлу из папки с бинарником
-void mx_sort_datas_list(t_flags **flags, t_d_list **list);             // --->
-// ---> В зависимости от флагов, применяет одну из сортировок ниже:
-void mx_ascii_sort(t_data **data_list);           //Сорт. в алфавитном порядке
-void mx_sort_size(t_data **data_list);                      //Сорт. по размеру
-void mx_sort_a_time(t_data **data_list);      //Сорт. по времени посл. доступа
-void mx_sort_c_time(t_data **data_list);    //Сорт. по времени посл. изменения
-void mx_sort_m_time(t_data **data_list);  //Сорт. по времени посл. модификации
-void mx_reverse_all(t_data **data_list);          //Меняет порядок на обратный
-int mx_size_data_list(t_data **data_list); //Количество листов в списке данных
-void mx_tbl_output(t_d_list *list, int flg_G, int flg_T);                // -l
-void mx_print_total_nblocks(t_data *list);         //Рахує total blocks для -l
-void mx_print_permission(t_data *cur_list);            //Вивід прав доступа -l
-void mx_print_time(time_t *t);                                    //Вивід часу
-bool mx_check_permission(t_d_list *list);                   //Проверка доступа
-void mx_print_permission_denied(t_d_list *list);//Вывод ошибки "Oтказ доступа"
-void mx_check_unprintable(char **name);     //Заменяет непечатные символы на ?
-void mx_print_chmod(t_data *current, int space_num, char *path); 
-// print permission
-void mx_check_unprintable(char **name);   //Заменяет непечатные символы на '?'
-void mx_one_column_output(t_d_list *list, int flg_G, int input);       // --->
-// ---> Вывод в одну колонку
-int mx_list_of_lists_size(t_d_list **list);           //Кол-во листов в списке
+int mx_number_of_dir(char **arr);
+int mx_number_of_flags(char **arr);
+char **mx_dir_arr(int argc, char **arr);
+char **mx_flags_arr(int argc, char **arr);
+t_flags *mx_create_flags_struct(char ***arr_str);
+bool mx_legal_flag(char ***arr_str);
+void mx_print_illegal(char ***arr_str);
+bool mx_find_flag(char ***arr_str, char f_char);
+int mx_check_arr_dir(char ***arr_dirname);
+void mx_check_flags_conflict(t_flags **flags);
+bool mx_legal_dirname(const char *name);
+void mx_print_wrong_dir(char ***arr_del);
+void mx_sort_arrstr(int flag_r, char ***arr_str);
+bool mx_status(struct stat buf);
+t_data *mx_create_data(char *path, char *filename);
+struct stat *mx_fill_buffer(const char *filename);
+void mx_push_data_back(t_data **list, t_data *last);
+t_d_list *mx_create_list(t_data *pathname, t_data *data);
+void mx_push_list_back(t_d_list **list, t_d_list *last);
+void mx_push_list_front(t_d_list **list, t_d_list *first);
+t_d_list *mx_list_full_assembly(t_flags **flags, char ***names);
+void mx_for_dir_to_list(t_flags **flags, t_d_list **list);
+void mx_sort_lists_list(t_flags **flags, t_d_list **list);
+void mx_l_ascii_sort(t_d_list **list);
+void mx_l_sort_size(t_d_list **list);
+void mx_l_sort_a_time(t_d_list **list);
+void mx_l_sort_c_time(t_d_list **list);
+void mx_l_sort_m_time(t_d_list **list);
+void mx_l_reverse(t_d_list **list);
+void mx_open_dir(t_flags **flags, t_d_list **list);
+void mx_plus_insight_dir(t_d_list **list);
+void mx_swap_data(t_data *first, t_data *second);
+void mx_swap_list(t_d_list *first, t_d_list *second);
+char *mx_make_pathname(const char *begin, const char *end);
+void mx_sort_datas_list(t_flags **flags, t_d_list **list);
+void mx_ascii_sort(t_data **data_list);
+void mx_sort_size(t_data **data_list);
+void mx_sort_a_time(t_data **data_list);
+void mx_sort_c_time(t_data **data_list);
+void mx_sort_m_time(t_data **data_list);
+void mx_reverse_all(t_data **data_list);
+int mx_size_data_list(t_data **data_list);
+void mx_tbl_output(t_d_list *list, int flg_G, int flg_T);
+void mx_print_total_nblocks(t_data *list);
+void mx_print_permission(t_data *cur_list);
+void mx_print_time(time_t *t);
+bool mx_check_permission(t_d_list *list);
+void mx_print_permission_denied(t_d_list *list);
+void mx_check_unprintable(char **name);
+void mx_print_chmod(t_data *current, int space_num, char *path);
+void mx_check_unprintable(char **name);
+void mx_one_column_output(t_d_list *list, int flg_G, int input);
+int mx_list_of_lists_size(t_d_list **list);
 void mx_all_print(t_flags **flgs, t_d_list **list, int terminal, int quant);
-//Вывод всех данных согласно флагов
-void mx_print_color(t_data *node);                             //Вывод в цвете
-void mx_print_minor(t_data *current, int nspaces);              // print major
-void mx_print_major(t_data *current, int nspaces);              // print minor
+void mx_print_color(t_data *node);
+void mx_print_minor(t_data *current, int nspaces);
+void mx_print_major(t_data *current, int nspaces);
 void mx_print_nlinks(t_data *current, int nspaces);
-int *mx_get_row_size(t_data *current);                    //рахує ширину рядка
+int *mx_get_row_size(t_data *current);
 void mx_print_size(t_data *current, int nspaces);
 void mx_print_uid(t_data *current, int nspaces);
 void mx_print_gid(t_data *current, int nspaces);
-void mx_out_mjmn(t_data *current, int *size);           //вивід major та minor
+void mx_out_mjmn(t_data *current, int *size);
 void mx_multicolumn_output(t_d_list *list, int flg_G, int input);
 int mx_columns(int max_name, int list_size);
 int mx_max_name(t_data *list, int flg_G);
