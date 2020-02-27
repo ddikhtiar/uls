@@ -60,8 +60,7 @@ typedef struct s_flags t_flags;
 typedef struct s_data t_data;
 typedef struct s_d_list t_d_list;
 
-typedef struct s_flags
-{
+typedef struct s_flags {
     int f_a;
     int f_A;
     int f_l;
@@ -79,16 +78,14 @@ typedef struct s_flags
     int illegal;
 }              t_flags;
 
-typedef struct s_data
-{
+typedef struct s_data {
     char *name;
     char *d_path;
     struct stat *buffer;
     struct s_data *next;
 }              t_data;
 
-typedef struct s_d_list
-{
+typedef struct s_d_list {
     struct s_data *path;
     struct s_data *link;
     struct s_d_list *next_list;
@@ -161,10 +158,10 @@ void mx_print_size(t_data *current, int nspaces);
 void mx_print_uid(t_data *current, int nspaces);
 void mx_print_gid(t_data *current, int nspaces);
 void mx_out_mjmn(t_data *current, int *size);
-void mx_multicolumn_output(t_d_list *list, int flg_G, int input);
-int mx_columns(int max_name, int list_size);
+void mx_multicolumn_output(t_d_list *list, int flg_G, int input, int window);
+int mx_columns(int max_name, int list_size, int n_isatty);
 int mx_max_name(t_data *list, int flg_G);
 void mx_print_name(t_data *data, int flg_G);
-void mx_print_spaces(const char *str, int max);
+void mx_print_spaces(const char *str, int max, int flg_G);
 
 #endif

@@ -13,6 +13,8 @@ int main (int argc, char **argv) {
         exit(1);
     x = mx_number_of_dir(dirs_names);
     list = mx_list_full_assembly(&flags, &dirs_names);
+    if (isatty(1) == 0)
+        flags->f_G = 0;
     mx_all_print(&flags, &list, isatty(1), x);
     // system("leaks uls");
     exit(0);

@@ -24,17 +24,17 @@ static void sx_finally_print(t_data *list, int flg_G, int strings, int max) {
                 mx_printchar('\n');
                 break;
             }
-            mx_print_spaces(ptr2->name, max);
+            mx_print_spaces(ptr2->name, max, flg_G);
         }
         list = list->next;
         counter--;
     }
 }
 
-static void sx_print_files(t_data *list, int flg_G) {
+static void sx_print_files(t_data *list, int flg_G, int window) {
     int max = mx_max_name(list, flg_G);
     int list_size = mx_size_data_list(&list);
-    int columns = mx_columns(max, list_size);
+    int columns = mx_columns(max, list_size, window);
     int strings = list_size / columns;
 
     if (list_size % columns != 0)
@@ -42,7 +42,7 @@ static void sx_print_files(t_data *list, int flg_G) {
     sx_finally_print(list, flg_G, strings, max);
 }
 
-void mx_multicolumn_output(t_d_list *list, int flg_G, int input) {
+void mx_multicolumn_output(t_d_list *list, int flg_G, int input, int window) {
     int size = mx_list_of_lists_size(&list);
 
     while (list) {
@@ -57,7 +57,7 @@ void mx_multicolumn_output(t_d_list *list, int flg_G, int input) {
         if (!mx_check_permission(list))
             mx_print_permission_denied(list);
         else if (list->link != NULL)
-            sx_print_files(list->link, flg_G);
+            sx_print_files(list->link, flg_G, window);
         list = list->next_list;
         if (list)
             mx_printchar('\n');

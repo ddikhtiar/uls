@@ -5,7 +5,7 @@ static int sx_col(unsigned int x, unsigned int size) {
 
     while (x > 1) {
         y = size / x;
-        if (y == 1 && (size % x > x / 2))
+        if (y == 1 && (size % x >= x / 2))
             return x;
         if (y >= 2) {
             if (x > 2 && size % x != 0 && size % (x - 1) == 0
@@ -20,7 +20,7 @@ static int sx_col(unsigned int x, unsigned int size) {
     return x;
 }
 
-int mx_columns(int max_name, int list_size) {
+int mx_columns(int max_name, int list_size, int n_isatty) {
     struct winsize sz;
     int window = 0;
     int column = 1;
@@ -28,6 +28,8 @@ int mx_columns(int max_name, int list_size) {
 
     ioctl(0, TIOCGWINSZ, &sz);
     window = sz.ws_col;
+    if (n_isatty == 0)
+        window = 80;
     x = window/max_name;
     if (x > 1) {
         if (x >= list_size)

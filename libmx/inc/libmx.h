@@ -77,8 +77,7 @@ void *mx_realloc(void *ptr, size_t size);
 
 // List pack
 
-typedef struct s_list
-{
+typedef struct s_list {
     void  *data;
     struct s_list *next;
 }              t_list;
