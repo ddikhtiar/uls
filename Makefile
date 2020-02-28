@@ -75,6 +75,7 @@ SRC = \
     mx_print_chmod.c \
     mx_print_name.c \
     mx_print_spaces.c \
+    mx_print_link.c \
 
 SRCF = \
     src/main.c \
@@ -143,6 +144,7 @@ SRCF = \
     src/mx_print_chmod.c \
     src/mx_print_name.c \
     src/mx_print_spaces.c \
+    src/mx_print_link.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -213,6 +215,7 @@ OBJO = \
     obj/mx_print_chmod.o \
     obj/mx_print_name.o \
     obj/mx_print_spaces.o \
+    obg/mx_print_link.o \
 
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 

@@ -2,7 +2,7 @@
 
 static void mx_out(t_data *current, int flg_T, int flg_G, int *size);
 static void print_full_date(char *str_date);
-static void mx_time_out(t_data *current, int flg_T);
+static void sx_time_out(t_data *current, int flg_T);
 
 void mx_tbl_output(t_d_list *list, int flg_G, int flg_T) {
 	t_d_list *ptr = list;
@@ -10,9 +10,10 @@ void mx_tbl_output(t_d_list *list, int flg_G, int flg_T) {
     int *size;
     int count = 0;
     int list_sz = mx_list_of_lists_size(&ptr);
-	
+    
     while(ptr){
         current = ptr->link;
+    	if(!current) return;
         if(list_sz > 1) {
             mx_printstr(ptr->path->name);
             mx_printstr(":\n");
@@ -21,7 +22,7 @@ void mx_tbl_output(t_d_list *list, int flg_G, int flg_T) {
 	    mx_print_total_nblocks(current);
         mx_out(current, flg_T, flg_G, size);
         (list_sz > 1 && count < list_sz - 1) ? mx_printstr("\n") : (void) (0);
-        count++;    // ^ перенос рядка для > 1 папки
+        count++;
         ptr = ptr->next_list;
         free(size);
     }
@@ -34,11 +35,12 @@ static void mx_out(t_data *current, int flg_T, int flg_G, int *size) {
         mx_print_uid(current, size[1]);
         mx_print_gid(current, size[2]);
         mx_out_mjmn(current, size);
-        mx_time_out(current, flg_T);
+        sx_time_out(current, flg_T);
         if (flg_G == 1)
             mx_print_color(current);
         else
             mx_printstr(current->name);
+        MX_ISLNK(current->buffer->st_mode) ? mx_print_link(current) : (void)0;
         mx_printstr("\n");
         current = current->next;
     }
@@ -56,7 +58,7 @@ void mx_out_mjmn(t_data *current, int *size) {
 }
 
 // print time in sec and miliseconds
-static void mx_time_out(t_data *current, int flg_T) {
+static void sx_time_out(t_data *current, int flg_T) {
     time_t *t;
     char *f_time;
 

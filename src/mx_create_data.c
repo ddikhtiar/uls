@@ -10,6 +10,9 @@ t_data *mx_create_data(char *path, char *filename) {
         data->buffer = mx_fill_buffer(path);
         data->next = NULL;
         data->d_path = mx_strdup(path);
+        if (MX_ISLNK(data->buffer->st_mode)) {
+            readlink(data->d_path, data->symlink, NAME_MAX);
+        }
     }
     return data;
 }
