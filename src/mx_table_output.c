@@ -5,22 +5,22 @@ static void print_full_date(char *str_date);
 static void sx_time_out(t_data *current, int flg_T);
 
 void mx_tbl_output(t_d_list *list, int flg_G, int flg_T) {
-	t_d_list *ptr = list;
-	t_data *current = ptr->link;
+    t_d_list *ptr = list;
+    t_data *current = ptr->link;
     int *size;
     int count = 0;
     int list_sz = mx_list_of_lists_size(&ptr);
     
     while(ptr){
         current = ptr->link;
-        MX_ISLNK(current->buffer->st_mode) ? current = ptr->path : printf("%s", current = ptr->path);
-    	if(!current) return;
+        MX_ISLNK(current->buffer->st_mode) ? current = ptr->path : 0;
+        if(!current) return;
         if(list_sz > 1) {
             mx_printstr(ptr->path->name);
             mx_printstr(":\n");
         }
         size = mx_get_row_size(current);
-	    mx_print_total_nblocks(current);
+        mx_print_total_nblocks(current);
         mx_out(current, flg_T, flg_G, size);
         (list_sz > 1 && count < list_sz - 1) ? mx_printstr("\n") : (void) (0);
         count++;

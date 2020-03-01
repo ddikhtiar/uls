@@ -3,12 +3,12 @@
 static char sx_illegal_char(char ***arr_str) {
     char **arr_ptr = *arr_str;
     char *str_ptr = NULL;
-	char c;
+    char c;
 
     while (*arr_ptr) {
         str_ptr = *arr_ptr + 1;
         while (*str_ptr) {
-			c = *str_ptr;
+            c = *str_ptr;
             if (c == 'a' || c == 'A' || c == 'l' || c == '1' || c == 'G'
                 || c == 'C' || c == 'r' || c == 't' || c == 'u' || c == 'c'
                 || c == 'S' || c == 'T' || c == 'R')
