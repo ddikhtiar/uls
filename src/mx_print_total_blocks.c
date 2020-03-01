@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_print_total_nblocks(t_data *list) {
+void mx_print_nblocks(t_data *list) {
     t_data *ptr = list;
     char *total_str = NULL;
     int total = 0;

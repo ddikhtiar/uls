@@ -1,31 +1,26 @@
 #include "uls.h"
 
-static void mx_out(t_data *current, int flg_T, int flg_G, int *size);
-static void print_full_date(char *str_date);
-static void sx_time_out(t_data *current, int flg_T);
+// print date in miliseconds
+static void print_full_date(char *str_date) {
+    char *date = NULL;
+    str_date += 4;
+    date = mx_strndup(str_date, mx_strlen(str_date) - 1);
+    mx_printstr(date);
+    mx_printstr(" ");
+    mx_strdel(&date);
+}
 
-void mx_tbl_output(t_d_list *list, int flg_G, int flg_T) {
-	t_d_list *ptr = list;
-	t_data *current = ptr->link;
-    int *size;
-    int count = 0;
-    int list_sz = mx_list_of_lists_size(&ptr);
-    
-    while(ptr){
-        current = ptr->link;
-        MX_ISLNK(current->buffer->st_mode) ? current = ptr->path : printf("%s", current = ptr->path);
-    	if(!current) return;
-        if(list_sz > 1) {
-            mx_printstr(ptr->path->name);
-            mx_printstr(":\n");
-        }
-        size = mx_get_row_size(current);
-	    mx_print_total_nblocks(current);
-        mx_out(current, flg_T, flg_G, size);
-        (list_sz > 1 && count < list_sz - 1) ? mx_printstr("\n") : (void) (0);
-        count++;
-        ptr = ptr->next_list;
-        free(size);
+// print time in sec and miliseconds
+static void sx_time_out(t_data *current, int flg_T) {
+    time_t *t;
+    char *f_time;
+
+    if(flg_T) {
+        f_time = ctime(&(current->buffer->st_mtimespec.tv_sec));
+        print_full_date(f_time);
+    } else {
+        t = &(current->buffer->st_mtimespec.tv_sec);
+        mx_print_time(t);
     }
 }
 
@@ -47,37 +42,36 @@ static void mx_out(t_data *current, int flg_T, int flg_G, int *size) {
     }
 }
 
-// major and minor or not
-void mx_out_mjmn(t_data *current, int *size) {
-    if (MX_ISCHR(current->buffer->st_mode) ||
-        MX_ISBLK(current->buffer->st_mode)) {
-        mx_print_major(current, 3);
-        mx_print_minor(current, 3);
-    } else {
-        mx_print_size(current, size[3]);
-    }
+static void sx_total(t_d_list *list, int flg_T, int flg_G) {
+    t_data *cur = NULL;
+    int *size;
+
+    cur = ((list->path && MX_ISLNK(list->path->buffer->st_mode)
+            && mx_check_slash(list->path->name)) ? list->path : list->link);
+    size = mx_get_row_size(cur);
+    mx_out(cur, flg_T, flg_G, size);
+    free(size);
 }
 
-// print time in sec and miliseconds
-static void sx_time_out(t_data *current, int flg_T) {
-    time_t *t;
-    char *f_time;
+void mx_tbl_output(t_d_list *list, int flg_G, int flg_T, int input) {
+    int list_sz = mx_list_of_lists_size(&list);
 
-    if(flg_T) {
-        f_time = ctime(&(current->buffer->st_mtimespec.tv_sec));
-        print_full_date(f_time);
-    } else {
-        t = &(current->buffer->st_mtimespec.tv_sec);
-        mx_print_time(t);
+    while(list){
+        if (list_sz > 1 && list->path != NULL) {
+            if (input != 1) {
+                mx_printstr(list->path->name);
+                mx_printstr(":\n");
+                (list->link != NULL) ? mx_print_nblocks(list->link) : (void)0;
+            }
+            else
+                input = 0;
+        }
+        if (!mx_check_permission(list))
+            mx_print_permission_denied(list);
+        else if (list->link != NULL)
+            sx_total(list, flg_T, flg_G);
+        list = list->next_list;
+        if (list)
+            mx_printchar('\n');
     }
-}
-
-// print date in miliseconds
-static void print_full_date(char *str_date) {
-    char *date = NULL;
-    str_date += 4;
-    date = mx_strndup(str_date, mx_strlen(str_date) - 1);
-    mx_printstr(date);
-    mx_printstr(" ");
-    mx_strdel(&date);
 }

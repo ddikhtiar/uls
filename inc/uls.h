@@ -81,7 +81,7 @@ typedef struct s_flags {
 typedef struct s_data {
     char *name;
     char *d_path;
-    char symlink[NAME_MAX];
+    char *symlink;
     struct stat *buffer;
     struct s_data *next;
 }              t_data;
@@ -138,8 +138,8 @@ void mx_sort_c_time(t_data **data_list);
 void mx_sort_m_time(t_data **data_list);
 void mx_reverse_all(t_data **data_list);
 int mx_size_data_list(t_data **data_list);
-void mx_tbl_output(t_d_list *list, int flg_G, int flg_T);
-void mx_print_total_nblocks(t_data *list);
+void mx_tbl_output(t_d_list *list, int flg_G, int flg_T, int input);
+void mx_print_nblocks(t_data *list);
 void mx_print_permission(t_data *cur_list);
 void mx_print_time(time_t *t);
 bool mx_check_permission(t_d_list *list);
@@ -165,5 +165,6 @@ int mx_max_name(t_data *list, int flg_G);
 void mx_print_name(t_data *data, int flg_G);
 void mx_print_spaces(const char *str, int max, int flg_G);
 void mx_print_link(t_data *current);
+bool mx_check_slash(const char *str);
 
 #endif
