@@ -15,5 +15,5 @@ void mx_pop_front(t_list **head) {
         (*head)->data = NULL;
         free(*head);
         *head = temp;
-	}
+    }
 }

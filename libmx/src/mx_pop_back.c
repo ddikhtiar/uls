@@ -14,7 +14,7 @@ void mx_pop_back(t_list **head) {
     }
     end = *head;
     while (end->next->next != NULL)
-        end = end->next;			
+        end = end->next;
     del = end->next;
     del->data = NULL;
     free(del);
