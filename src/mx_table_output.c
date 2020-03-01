@@ -61,11 +61,11 @@ void mx_tbl_output(t_d_list *list, int flg_G, int flg_T, int input) {
             if (input != 1) {
                 mx_printstr(list->path->name);
                 mx_printstr(":\n");
-                (list->link != NULL) ? mx_print_nblocks(list->link) : (void)0;
             }
             else
                 input = 0;
         }
+        (list->link && list->path) ? mx_print_nblocks(list->link) : (void)0;
         if (!mx_check_permission(list))
             mx_print_permission_denied(list);
         else if (list->link != NULL)
